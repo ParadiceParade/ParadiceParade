@@ -397,11 +397,11 @@ export default {
 
       await this.$sleep(1500)
 
-      this.$commit('UPDATE', { path: 'appLoading', value: false })
+      await this.openCart()
 
       await nextAnimFrame()
 
-      await this.openCart()
+      this.$commit('UPDATE', { path: 'appLoading', value: false })
     },
 
     async openCart() {
