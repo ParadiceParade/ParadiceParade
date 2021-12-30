@@ -27,6 +27,8 @@ export default function state() {
       filters: {}
     },
 
-    appLoading: false
+    appLoading: false,
+
+    cart: []
   }
 }

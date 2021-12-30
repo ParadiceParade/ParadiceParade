@@ -52,7 +52,7 @@ export default {
     transitionName() {
       if (
         /xxs|xs/.test(this.breakpoints.is) &&
-        this.toRender == 'ProductListFilter'
+        /ProductListFilter|Cart/.test(this.toRender)
       ) {
         return 'slide-y'
       }

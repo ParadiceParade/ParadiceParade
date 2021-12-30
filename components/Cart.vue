@@ -10,7 +10,13 @@
       </Button>
     </header>
 
-    <div class="h-full flex flex-col shadow-xl overflow-y-scroll">
+    <div v-if="!cart.length">
+      <h3 class="font-bold text-xl px-3 text-center mt-12">
+        Your cart is empty
+      </h3>
+    </div>
+
+    <div v-else class="h-full flex flex-col overflow-y-scroll">
       <div class="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
         <div class="mt-8">
           <div class="flow-root">
@@ -107,6 +113,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 const products = [
   {
     id: 1,
@@ -140,6 +147,10 @@ export default {
   data: () => ({
     products
   }),
+
+  computed: {
+    ...mapState(['cart'])
+  },
 
   methods: {
     closeDialog() {
