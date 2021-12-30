@@ -65,7 +65,7 @@
 
               <Component
                 :is="`Mdi-${option.active ? 'Checkbox' : 'BlankCheckbox'}`"
-                class="group-focus-within:ring text-xl rounded ring-primary-800 dark:ring-primary-600"
+                class="group-focus-within:ring text-2xl rounded ring-primary-800 dark:ring-primary-600"
                 :class="{
                   'text-primary-600 dark:text-primary-400': option.active,
                   'opacity-75': !option.active

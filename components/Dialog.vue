@@ -62,7 +62,6 @@ export default {
     transitionEvents() {
       return {
         beforeEnter: this.onBeforeEnter,
-        enter: this.onEnter,
         afterEnter: this.onAfterEnter,
         leave: this.onLeave,
         afterLeave: this.onAfterLeave
@@ -100,11 +99,9 @@ export default {
       this.previousActive = document.activeElement
     },
 
-    onEnter(e) {
-      e.focus({ preventScroll: true })
-    },
-
     onAfterEnter(e) {
+      e.focus({ preventScroll: true })
+
       document.documentElement.classList.add('dialog-active')
     },
 

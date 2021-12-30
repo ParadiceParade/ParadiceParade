@@ -9,18 +9,20 @@
         class="w-full h-full object-center object-contain lg:w-full lg:h-full"
       />
 
-      <Button
-        :key="saveIcon"
-        icon
-        role="checkbox"
-        :aria-checked="saved"
-        :title="saved ? 'saved' : 'click to save'"
-        class="fade-appear w-[32px] h-[32px] absolute bottom-0 right-0 m-3 sm:m-2 z-10 text-black"
-        :class="{ 'opacity-75': !saved, 'opacity-90': saved }"
-        @click.stop.prevent="saved = !saved"
-      >
-        <Component :is="saveIcon" />
-      </Button>
+      <div class="absolute h-full w-full top-0 left-0">
+        <Button
+          :key="saveIcon"
+          icon
+          role="checkbox"
+          :aria-checked="saved"
+          :title="saved ? 'saved' : 'click to save'"
+          class="fade-appear w-[32px] h-[32px] absolute bottom-0 right-0 m-1 sm:m-2 z-10 text-black"
+          :class="{ 'opacity-75': !saved, 'opacity-90': saved }"
+          @click.stop.prevent="saved = !saved"
+        >
+          <Component :is="saveIcon" class="text-xl" />
+        </Button>
+      </div>
     </div>
     <div class="mt-4 flex justify-between">
       <div>

@@ -44,7 +44,7 @@
         class="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8"
       >
         <div
-          class="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block"
+          class="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block bg-gray-100"
         >
           <img
             :src="product.images[0].src"
@@ -246,7 +246,7 @@
             </div>
 
             <div class="w-full flex mt-10 justify-between items-center">
-              <Button type="submit" class="flex-grow mr-4" primary>
+              <Button type="submit" class="flex-grow" primary>
                 Add to bag
               </Button>
 
@@ -256,7 +256,7 @@
                 role="checkbox"
                 :aria-checked="saved"
                 :title="saved ? 'saved' : 'click to save'"
-                class="fade-appear w-[32px] h-[32px]"
+                class="fade-appear w-[32px] h-[32px] ml-8 mr-6"
                 :class="{ 'opacity-75': !saved, 'opacity-90': saved }"
                 @click.stop.prevent="saved = !saved"
               >
@@ -274,7 +274,9 @@
             <h3 class="sr-only">Description</h3>
 
             <div class="space-y-6">
-              <p class="text-base text-gray-900 dark:text-gray-100">
+              <p
+                class="text-base text-gray-900 dark:text-gray-100 leading-relaxed"
+              >
                 {{ product.description }}
               </p>
             </div>
@@ -302,12 +304,28 @@
 
           <div class="mt-10">
             <h2 class="text-sm font-medium text-gray-900 dark:text-gray-100">
-              Looking after me
+              Fabric & care
             </h2>
 
             <div class="mt-4 space-y-6">
               <p class="text-sm text-gray-600 dark:text-gray-300">
                 {{ product.care }}
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-10">
+            <h2
+              class="text-sm font-medium flex items-center text-gray-900 dark:text-gray-100"
+            >
+              Product code
+
+              <CopyIcon :text="product.code" class="ml-2" />
+            </h2>
+
+            <div class="mt-4 space-y-6">
+              <p class="text-sm text-gray-600 dark:text-gray-300">
+                {{ product.code }}
               </p>
             </div>
           </div>
@@ -319,7 +337,7 @@
 
             <div class="mt-4 space-y-6">
               <p class="text-sm text-gray-600 dark:text-gray-300">
-                {{ product.details }}
+                {{ product.care }}
               </p>
             </div>
           </div>
@@ -390,8 +408,8 @@ const product = {
     'Pre-washed & pre-shrunk',
     'Ultra-soft 100% cotton'
   ],
-  looking: 'Check hang tag for details',
-  productCode: 'prd-skaks',
+  care: 'Check hang tag for details',
+  code: 'prd-skaks',
   sizeAndFit: {
     height: '185cm',
     waering: 'Size - Medium'

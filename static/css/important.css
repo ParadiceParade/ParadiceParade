@@ -125,12 +125,6 @@
   background-color: rgba(0, 0, 0, 0.548);
 }
 
-@media (max-width: 612px) {
-  html {
-    font-size: 14.5px;
-  }
-}
-
 @media (min-width: 1920px) {
   html {
     font-size: 18px;
@@ -173,7 +167,6 @@ html {
   font-family: 'Barlow Semi Condensed', sans-serif !important;
   /* font-family: 'Noto sans display', sans-serif !important; */
 
-  word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;

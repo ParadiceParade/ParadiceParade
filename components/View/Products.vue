@@ -84,7 +84,7 @@
 
     <!-- product list -->
     <div
-      class="mt-6 mb-12 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 px-6 max-w-[1500px] mx-auto"
+      class="mt-6 mb-12 grid grid-cols-1 gap-y-10 gap-x-6 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 px-6 max-w-[1500px] mx-auto"
     >
       <ProductListCard v-for="i in 16" :key="i" />
     </div>

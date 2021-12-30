@@ -25,6 +25,10 @@ import star from 'vue-material-design-icons/Star.vue'
 import heart from 'vue-material-design-icons/Heart.vue'
 import heartOutline from 'vue-material-design-icons/HeartOutline.vue'
 
+import copy from 'vue-material-design-icons/ClipboardEdit.vue'
+import copied from 'vue-material-design-icons/ClipboardCheck.vue'
+import copyError from 'vue-material-design-icons/ClipboardAlert.vue'
+
 import 'vue-material-design-icons/styles.css'
 import { capitalize } from './main'
 
@@ -54,7 +58,10 @@ export default function registerComponents(Vue) {
     magnify,
     star,
     heart,
-    heartOutline
+    heartOutline,
+    copy,
+    copied,
+    copyError
   }
 
   Object.entries(icons).forEach((entry) => {

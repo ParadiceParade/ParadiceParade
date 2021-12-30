@@ -106,7 +106,12 @@ export function setTouchDevice() {
   }
 }
 
-export function Copy({ text, onSuccess = () => {}, onError = () => {} }) {
+export function Copy({
+  text,
+  done = () => {},
+  onSuccess = () => {},
+  onError = () => {}
+}) {
   return new Promise((r) => {
     const oldBrowser = () => {
       try {
@@ -127,6 +132,7 @@ export function Copy({ text, onSuccess = () => {}, onError = () => {} }) {
           onError()
         }
       } finally {
+        done()
         r()
       }
     }
@@ -135,6 +141,8 @@ export function Copy({ text, onSuccess = () => {}, onError = () => {} }) {
       try {
         navigator.clipboard.writeText(text)
         onSuccess()
+        done()
+
         r()
       } catch (e) {
         if (e) {
