@@ -1,10 +1,19 @@
 <template>
   <div
-    v-if="canRender"
     class="fixed z-50 pointer-events-none h-full w-full left-0 top-0 isolate overflow-hidden"
   >
     <Dialog />
     <Menu />
+
+    <div
+      v-if="appLoading"
+      title="loading, please wait"
+      tabindex="1"
+      class="fixed w-full h-full flex items-center justify-center bg-black bg-opacity-70 dark:bg-opacity-70 fade-appear z-50 outline-none pointer-events-auto"
+      v-on="events"
+    >
+      <Loader />
+    </div>
   </div>
 </template>
 
@@ -14,10 +23,22 @@ export default {
   name: 'Overlays',
 
   computed: {
-    ...mapState(['dialog', 'menu']),
+    ...mapState(['appLoading']),
 
     canRender() {
       return !!(this.menu.component || this.dialog.component)
+    },
+
+    events() {
+      const preventDefault = (e) => {
+        e.preventDefault()
+      }
+      return {
+        ttouchstart: preventDefault,
+        wheel: preventDefault,
+        keydown: preventDefault,
+        animationend: (e) => e.currentTarget.focus()
+      }
     }
   }
 }

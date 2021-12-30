@@ -39,6 +39,12 @@ import {
 export default {
   name: 'DefaultLayout',
 
+  beforeRouteLeave(to, from, next) {
+    if (!this.appLoading) {
+      return next()
+    }
+  },
+
   data: () => ({
     ...breakpoints.data,
     selfMounted: false
@@ -109,7 +115,7 @@ export default {
 
   computed: {
     ...breakpoints.computed,
-    ...mapState(['appMounted'])
+    ...mapState(['appMounted', 'appLoading'])
   },
 
   watch: {
