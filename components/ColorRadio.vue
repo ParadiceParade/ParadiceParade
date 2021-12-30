@@ -20,12 +20,28 @@
         @input="onUpdate(item)"
       />
 
-      <span
+      <div
         class="h-8 w-8 rounded-full border border-black dark:border-white border-opacity-10 dark:border-opacity-20"
         :style="{
           background: item.code
         }"
-      />
+      >
+        <svg
+          v-if="item.disabled"
+          class="absolute inset-0 w-full h-full text-gray-200 dark:text-gray-600 stroke-2"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          stroke="currentColor"
+        >
+          <line
+            x1="0"
+            y1="100"
+            x2="100"
+            y2="0"
+            vector-effect="non-scaling-stroke"
+          ></line>
+        </svg>
+      </div>
     </label>
   </div>
 </template>
@@ -58,7 +74,7 @@ export default {
 
   methods: {
     onUpdate(item) {
-      this.$emit('onvmodel', item)
+      !item.disabled && this.$emit('onvmodel', item)
     }
   }
 }

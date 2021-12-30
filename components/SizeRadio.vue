@@ -11,7 +11,7 @@
       :class="{
         'ring-primary-700 dark:ring-primary-500 ring ring-offset-1':
           item.title == activeItem.title,
-        'opacity-50 pointer-events-none': item.disabled
+        'opacity-30 pointer-events-none': item.disabled
       }"
       @click="onUpdate(item)"
     >
@@ -29,14 +29,30 @@
         {{ item.title }}
       </span>
 
-      <span
+      <div
         class="absolute -inset-px rounded-md pointer-events-none border-2 dark:border-opacity-10 border-opacity-10"
         :class="{
           'border-black dark:border-white': item.title != activeItem.title,
           'border-primary-700 dark:border-primary-500':
             item.title == activeItem.title
         }"
-      />
+      >
+        <svg
+          v-if="item.disabled"
+          class="absolute inset-0 w-full h-full text-gray-200 dark:text-gray-600 stroke-2"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          stroke="currentColor"
+        >
+          <line
+            x1="0"
+            y1="100"
+            x2="100"
+            y2="0"
+            vector-effect="non-scaling-stroke"
+          ></line>
+        </svg>
+      </div>
     </label>
   </div>
 </template>
@@ -69,7 +85,7 @@ export default {
 
   methods: {
     onUpdate(item) {
-      this.$emit('onvmodel', item)
+      !item.disabled && this.$emit('onvmodel', item)
     }
   }
 }

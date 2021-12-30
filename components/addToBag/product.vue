@@ -307,14 +307,14 @@ const product = {
     { title: 'Black', code: '#000' }
   ],
   sizes: [
-    { title: 'XXS', disabled: false },
-    { title: 'XS', disabled: true },
-    { title: 'S', disabled: true },
-    { title: 'M', disabled: true },
-    { title: 'L', disabled: true },
-    { title: 'XL', disabled: true },
-    { title: '2XL', disabled: true },
-    { title: '3XL', disabled: true }
+    { title: 'XXS', disabled: true },
+    { title: 'XS' },
+    { title: 'S' },
+    { title: 'M' },
+    { title: 'L' },
+    { title: 'XL' },
+    { title: '2XL' },
+    { title: '3XL' }
   ],
   description:
     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
