@@ -6,7 +6,7 @@
     <label
       v-for="(item, i) in items"
       :key="i"
-      :for="`color-radio-${item.title}`"
+      :for="`size-radio-${item.title}`"
       class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none sm:flex-1 sm:py-6 bg-white dark:bg-gray-900 shadow-sm text-gray-900 dark:text-gray-100 cursor-pointer undefined"
       :class="{
         'ring-primary-700 dark:ring-primary-500 ring ring-offset-1':
@@ -14,9 +14,10 @@
       }"
     >
       <input
-        :id="`color-radio-${item.title}`"
+        :id="`size-radio-${item.title}`"
         type="radio"
         :value="item.title"
+        :checked="item.title == activeItem.title"
         class="sr-only"
         @input="onUpdate(item)"
       />

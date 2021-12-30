@@ -355,6 +355,7 @@ export default {
 
     changeSize(item) {
       this.selectedSize = item
+      console.log(item)
     }
   }
 }

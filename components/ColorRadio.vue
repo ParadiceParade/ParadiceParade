@@ -14,6 +14,7 @@
         :id="`color-radio-${item.title}`"
         type="radio"
         :value="item.title"
+        :checked="item.title == activeItem.title"
         class="sr-only"
         @input="onUpdate(item)"
       />
