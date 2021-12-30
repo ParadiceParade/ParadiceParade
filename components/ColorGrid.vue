@@ -56,7 +56,7 @@ export default {
 
   methods: {
     onUpdate(item) {
-      this.$emit('vmodel', item)
+      this.$emit('onvmodel', item)
     }
   }
 }

@@ -406,6 +406,7 @@ export default {
   methods: {
     changeColor(item) {
       this.selectedColor = item
+      console.log(item)
     }
   }
 }
