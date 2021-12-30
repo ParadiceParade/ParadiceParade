@@ -19,6 +19,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { eventKey } from '~/utils/main'
 export default {
   name: 'Overlays',
 
@@ -36,7 +37,13 @@ export default {
       return {
         ttouchstart: preventDefault,
         wheel: preventDefault,
-        keydown: preventDefault,
+        keydown: (e) => {
+          const key = eventKey(e)
+
+          if (/arrow/.test(key)) {
+            preventDefault(e)
+          }
+        },
         animationend: (e) => e.currentTarget.focus()
       }
     }
