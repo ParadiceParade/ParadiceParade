@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-flow-col gap-x-4 py-4 justify-start">
+  <div role="radiogroup" class="grid grid-flow-col gap-x-4 py-4 justify-start">
     <label
       v-for="(item, i) in items"
       :key="i"
