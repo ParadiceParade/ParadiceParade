@@ -25,6 +25,8 @@ export default function state() {
       gridView: true,
       sortBy: {},
       filters: {}
-    }
+    },
+
+    appLoading: false
   }
 }

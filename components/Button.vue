@@ -64,7 +64,17 @@ export default {
         ],
         on: this.$listeners
       },
-      [this.$slots.default]
+      [
+        this.$slots.default
+        // h(
+        //   'div',
+        //   {
+        //     class:
+        //       'absolute flex items-center justify-center w-full h-full rounded-[inherit]'
+        //   },
+        //   [h('Loader')]
+        // )
+      ]
     )
   }
 }
