@@ -27,7 +27,7 @@ export default {
     ...mapState(['appLoading']),
 
     canRender() {
-      return !!(this.menu.component || this.dialog.component)
+      return !!(this.menu.component || this.dialog.component || this.appLoading)
     },
 
     events() {
