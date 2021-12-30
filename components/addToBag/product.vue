@@ -132,7 +132,11 @@
                 Color
               </h3>
 
-              <ColorGrid v-model="selectedColor" :items="product.colors" />
+              <ColorGrid
+                :vmodel="selectedColor"
+                :items="product.colors"
+                @onvmodel="changeColor"
+              />
             </div>
 
             <!-- Sizes -->
@@ -396,6 +400,12 @@ export default {
   computed: {
     saveIcon() {
       return `Mdi${this.saved ? 'Heart' : 'HeartOutline'}`
+    }
+  },
+
+  methods: {
+    changeColor(item) {
+      this.selectedColor = item
     }
   }
 }
