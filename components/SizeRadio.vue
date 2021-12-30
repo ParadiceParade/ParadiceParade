@@ -1,0 +1,71 @@
+<template>
+  <div class="grid grid-flow-col gap-x-4 py-4 justify-start">
+    <label
+      v-for="(item, i) in items"
+      :key="i"
+      :for="`color-radio-${item.title}`"
+      class="group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 bg-white shadow-sm text-gray-900 cursor-pointer undefined"
+      :class="{
+        'ring-gray-400 dark:ring-gray-700 ring ring-offset-1':
+          item.title == activeItem.title
+      }"
+    >
+      <input
+        :id="`color-radio-${item.title}`"
+        type="radio"
+        :value="item.title"
+        class="sr-only"
+        @input="onUpdate(item)"
+      />
+
+      <span class="uppercase">
+        {{ item.title }}
+      </span>
+
+      <span
+        class="absolute -inset-px rounded-md pointer-events-none border-2"
+        :class="{
+          'border-transparent': item.title != activeItem.title,
+          'border-primary-700 dark:border-primary-500':
+            item.title == activeItem.title
+        }"
+      />
+    </label>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'SizeRadio',
+
+  model: {
+    props: 'vmodel',
+    event: 'onvmodel'
+  },
+
+  props: {
+    vmodel: {
+      type: Object,
+      default: undefined
+    },
+    items: {
+      type: Array,
+      default: () => []
+    }
+  },
+
+  computed: {
+    activeItem() {
+      return this.vmodel || this.items[0]
+    }
+  },
+
+  methods: {
+    onUpdate(item) {
+      this.$emit('onvmodel', item)
+    }
+  }
+}
+</script>
+
+<style></style>
