@@ -154,7 +154,7 @@
                 >
               </div>
 
-              <ColorRadio
+              <SizeRadio
                 :vmodel="selectedSize"
                 :items="product.sizes"
                 @onvmodel="changeSize"
@@ -307,14 +307,14 @@ const product = {
     { title: 'Black', code: '#000' }
   ],
   sizes: [
-    { name: 'XXS', inStock: false },
-    { name: 'XS', inStock: true },
-    { name: 'S', inStock: true },
-    { name: 'M', inStock: true },
-    { name: 'L', inStock: true },
-    { name: 'XL', inStock: true },
-    { name: '2XL', inStock: true },
-    { name: '3XL', inStock: true }
+    { title: 'XXS', disabled: false },
+    { title: 'XS', disabled: true },
+    { title: 'S', disabled: true },
+    { title: 'M', disabled: true },
+    { title: 'L', disabled: true },
+    { title: 'XL', disabled: true },
+    { title: '2XL', disabled: true },
+    { title: '3XL', disabled: true }
   ],
   description:
     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
