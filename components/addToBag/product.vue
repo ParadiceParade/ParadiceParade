@@ -132,7 +132,7 @@
                 Color
               </h3>
 
-              <ColorGrid
+              <ColorRadio
                 :vmodel="selectedColor"
                 :items="product.colors"
                 @onvmodel="changeColor"
