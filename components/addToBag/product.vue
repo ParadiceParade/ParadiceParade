@@ -132,40 +132,7 @@
                 Color
               </h3>
 
-              <!-- <RadioGroup v-model="selectedColor" class="mt-4">
-                <RadioGroupLabel class="sr-only">
-                  Choose a color
-                </RadioGroupLabel>
-                <div class="flex items-center space-x-3">
-                  <RadioGroupOption
-                    v-for="color in product.colors"
-                    :key="color.name"
-                    v-slot="{ active, checked }"
-                    as="template"
-                    :value="color"
-                  >
-                    <div
-                      :class="[
-                        color.selectedClass,
-                        active && checked ? 'ring ring-offset-1' : '',
-                        !active && checked ? 'ring-2' : '',
-                        '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
-                      ]"
-                    >
-                      <RadioGroupLabel as="p" class="sr-only">
-                        {{ color.name }}
-                      </RadioGroupLabel>
-                      <span
-                        aria-hidden="true"
-                        :class="[
-                          color.class,
-                          'h-8 w-8 border border-black border-opacity-10 rounded-full'
-                        ]"
-                      />
-                    </div>
-                  </RadioGroupOption>
-                </div>
-              </RadioGroup> -->
+              <ColorGrid v-model="selectedColor" :items="product.colors" />
             </div>
 
             <!-- Sizes -->
@@ -386,9 +353,9 @@ const product = {
     }
   ],
   colors: [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' }
+    { title: 'White', code: '#fff' },
+    { title: 'Gray', code: '#808080' },
+    { title: 'Black', code: '#000' }
   ],
   sizes: [
     { name: 'XXS', inStock: false },
