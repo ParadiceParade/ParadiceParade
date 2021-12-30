@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: 'ColorGrid',
+  name: 'ColorRadio',
 
   model: {
     props: 'vmodel',
