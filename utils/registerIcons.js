@@ -12,7 +12,6 @@ import moon from 'vue-material-design-icons/WeatherNight.vue'
 import arrowRightThin from 'vue-material-design-icons/ArrowRight.vue'
 import check from 'vue-material-design-icons/Check.vue'
 import filter from 'vue-material-design-icons/Filter.vue'
-import filterCheck from 'vue-material-design-icons/FilterCheck.vue'
 import grid from 'vue-material-design-icons/ViewGrid.vue'
 import gridOutline from 'vue-material-design-icons/ViewGridOutline.vue'
 import close from 'vue-material-design-icons/Close.vue'
@@ -51,7 +50,6 @@ export default function registerComponents(Vue) {
     arrowRightThin,
     check,
     filter,
-    filterCheck,
     grid,
     gridOutline,
     close,
