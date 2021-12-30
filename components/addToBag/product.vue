@@ -154,66 +154,11 @@
                 >
               </div>
 
-              <!-- <RadioGroup v-model="selectedSize" class="mt-4">
-                <RadioGroupLabel class="sr-only">
-                  Choose a size
-                </RadioGroupLabel>
-                <div
-                  class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4"
-                >
-                  <RadioGroupOption
-                    v-for="size in product.sizes"
-                    :key="size.name"
-                    v-slot="{ active, checked }"
-                    as="template"
-                    :value="size"
-                    :disabled="!size.inStock"
-                  >
-                    <div
-                      :class="[
-                        size.inStock
-                          ? 'bg-white shadow-sm text-gray-900 cursor-pointer'
-                          : 'bg-gray-50 text-gray-200 cursor-not-allowed',
-                        active ? 'ring-2 ring-indigo-500' : '',
-                        'group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
-                      ]"
-                    >
-                      <RadioGroupLabel as="p">
-                        {{ size.name }}
-                      </RadioGroupLabel>
-                      <div
-                        v-if="size.inStock"
-                        :class="[
-                          active ? 'border' : 'border-2',
-                          checked ? 'border-indigo-500' : 'border-transparent',
-                          'absolute -inset-px rounded-md pointer-events-none'
-                        ]"
-                        aria-hidden="true"
-                      />
-                      <div
-                        v-else
-                        aria-hidden="true"
-                        class="absolute -inset-px rounded-md border-2 border-gray-200 pointer-events-none"
-                      >
-                        <svg
-                          class="absolute inset-0 w-full h-full text-gray-200 stroke-2"
-                          viewBox="0 0 100 100"
-                          preserveAspectRatio="none"
-                          stroke="currentColor"
-                        >
-                          <line
-                            x1="0"
-                            y1="100"
-                            x2="100"
-                            y2="0"
-                            vector-effect="non-scaling-stroke"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </RadioGroupOption>
-                </div>
-              </RadioGroup> -->
+              <ColorRadio
+                :vmodel="selectedSize"
+                :items="product.sizes"
+                @onvmodel="changeSize"
+              />
             </div>
 
             <div class="w-full flex mt-10 justify-between items-center">
@@ -406,7 +351,10 @@ export default {
   methods: {
     changeColor(item) {
       this.selectedColor = item
-      console.log(item)
+    },
+
+    changeSize(item) {
+      this.selectedSize = item
     }
   }
 }
