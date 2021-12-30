@@ -1,5 +1,5 @@
 <template>
-  <div role="radiogroup" class="grid grid-flow-col gap-x-4 py-4 justify-start">
+  <div class="grid grid-flow-col gap-x-4 py-4 justify-start">
     <label
       v-for="(item, i) in items"
       :key="i"
@@ -15,6 +15,7 @@
         type="radio"
         :value="item.title"
         :checked="item.title == activeItem.title"
+        :disabled="item.disabled"
         class="sr-only"
         @input="onUpdate(item)"
       />
