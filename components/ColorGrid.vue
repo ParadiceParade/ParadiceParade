@@ -1,10 +1,14 @@
 <template>
-  <div>
+  <div class="grid grid-flow-col gap-x-4 py-4 justify-start">
     <label
       v-for="(item, i) in items"
       :key="i"
       :for="`color-radio-${item.title}`"
-      class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-400 dark:ring-gray-700 ring ring-offset-1"
+      class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none w-[fit-content]"
+      :class="{
+        'ring-gray-400 dark:ring-gray-700 ring ring-offset-1':
+          item.title == activeItem
+      }"
     >
       <input
         :id="`color-radio-${item.title}`"
