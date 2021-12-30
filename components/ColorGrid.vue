@@ -7,7 +7,7 @@
       class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none w-[fit-content]"
       :class="{
         'ring-gray-400 dark:ring-gray-700 ring ring-offset-1':
-          item.title == activeItem
+          item.title == activeItem.title
       }"
     >
       <input
@@ -15,10 +15,11 @@
         type="radio"
         :value="item.title"
         class="sr-only"
+        @input="onUpdate(item)"
       />
 
       <span
-        class="h-8 w-8 rounded-full border border-black dark:border-white border-opacity-10"
+        class="h-8 w-8 rounded-full border border-black dark:border-white border-opacity-10 dark:border-opacity-20"
         :style="{
           background: item.code
         }"
@@ -38,8 +39,8 @@ export default {
 
   props: {
     vmodel: {
-      type: String,
-      default: ''
+      type: Object,
+      default: () => ({})
     },
     items: {
       type: Array,
@@ -49,7 +50,13 @@ export default {
 
   computed: {
     activeItem() {
-      return this.vmodel || this.items[0].title
+      return this.vmodel || this.items[0]
+    }
+  },
+
+  methods: {
+    onUpdate(item) {
+      this.$emit('vmodel', item)
     }
   }
 }
