@@ -1,3 +1,5 @@
+import 'vue-material-design-icons/styles.css'
+
 import menu from 'vue-material-design-icons/Menu.vue'
 import chevronDown from 'vue-material-design-icons/ChevronDown.vue'
 import chevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
@@ -29,7 +31,9 @@ import copy from 'vue-material-design-icons/ClipboardEdit.vue'
 import copied from 'vue-material-design-icons/ClipboardCheck.vue'
 import copyError from 'vue-material-design-icons/ClipboardAlert.vue'
 
-import 'vue-material-design-icons/styles.css'
+import facebook from 'vue-material-design-icons/Facebook.vue'
+import instagram from 'vue-material-design-icons/Instagram.vue'
+import twitter from 'vue-material-design-icons/Twitter.vue'
 import { capitalize } from './main'
 
 export default function registerComponents(Vue) {
@@ -61,7 +65,10 @@ export default function registerComponents(Vue) {
     heartOutline,
     copy,
     copied,
-    copyError
+    copyError,
+    facebook,
+    instagram,
+    twitter
   }
 
   Object.entries(icons).forEach((entry) => {
