@@ -162,7 +162,12 @@
             </div>
 
             <div class="w-full flex mt-10 justify-between items-center">
-              <Button type="submit" class="flex-grow" primary>
+              <Button
+                type="submit"
+                class="flex-grow"
+                primary
+                @click.prevent="addToBag"
+              >
                 Add to bag
               </Button>
 
@@ -285,6 +290,7 @@
 </template>
 
 <script>
+import { nextAnimFrame } from '~/utils/main'
 const product = {
   name: 'Basic Tee 6-Pack',
   price: '$192',
@@ -381,6 +387,40 @@ export default {
     changeSize(item) {
       this.selectedSize = item
       console.log(item)
+    },
+
+    async addToBag() {
+      this.$commit('UPDATE', {
+        path: 'appLoading',
+        value: true
+      })
+
+      await this.$sleep(1500)
+
+      this.$commit('UPDATE', { path: 'appLoading', value: false })
+
+      await nextAnimFrame()
+
+      await this.openCart()
+    },
+
+    async openCart() {
+      this.$commit('UPDATE', {
+        path: 'dialog',
+        value: {
+          component: 'Cart',
+          transition: 'slide-x',
+          contentClass: 'h-full right-0 bottom-0 sm:rounded-none'
+        }
+      })
+
+      await this.$nextTick()
+
+      this.$commit('UPDATE', {
+        path: 'active',
+        innerPath: 'dialog',
+        value: true
+      })
     }
   }
 }
