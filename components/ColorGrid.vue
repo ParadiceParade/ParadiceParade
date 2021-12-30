@@ -3,18 +3,21 @@
     <label
       v-for="(item, i) in items"
       :key="i"
-      :for="`color-radio-${item.value}`"
+      :for="`color-radio-${item.title}`"
       class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-400 dark:ring-gray-700 ring ring-offset-1"
     >
       <input
-        :id="`color-radio-${item.value}`"
+        :id="`color-radio-${item.title}`"
         type="radio"
-        :value="item.value"
+        :value="item.title"
         class="sr-only"
       />
 
       <span
         class="h-8 w-8 rounded-full border border-black dark:border-white border-opacity-10"
+        :style="{
+          background: item.code
+        }"
       />
     </label>
   </div>
@@ -42,7 +45,7 @@ export default {
 
   computed: {
     activeItem() {
-      return this.vmodel || this.items[0].value
+      return this.vmodel || this.items[0].title
     }
   }
 }
