@@ -40,7 +40,7 @@ export default {
   props: {
     vmodel: {
       type: Object,
-      default: () => ({})
+      default: undefined
     },
     items: {
       type: Array,
