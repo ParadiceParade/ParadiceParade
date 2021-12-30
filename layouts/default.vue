@@ -134,6 +134,25 @@ export default {
     Vue.prototype.$commit = this.$store.commit
     Vue.prototype.$c4 = Vue.observable(new C4UiLib())
     Vue.prototype.$theme = Vue.prototype.$c4.theme
+
+    Vue.prototype.$openCart = async () => {
+      this.$commit('UPDATE', {
+        path: 'dialog',
+        value: {
+          component: 'Cart',
+          transition: 'slide-x',
+          contentClass: 'h-full right-0 bottom-0 sm:rounded-none'
+        }
+      })
+
+      await this.$nextTick()
+
+      this.$commit('UPDATE', {
+        path: 'active',
+        innerPath: 'dialog',
+        value: true
+      })
+    }
   },
 
   created() {

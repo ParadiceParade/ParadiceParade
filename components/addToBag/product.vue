@@ -405,22 +405,7 @@ export default {
     },
 
     async openCart() {
-      this.$commit('UPDATE', {
-        path: 'dialog',
-        value: {
-          component: 'Cart',
-          transition: 'slide-x',
-          contentClass: 'h-full right-0 bottom-0 sm:rounded-none'
-        }
-      })
-
-      await this.$nextTick()
-
-      this.$commit('UPDATE', {
-        path: 'active',
-        innerPath: 'dialog',
-        value: true
-      })
+      await this.$openCart()
     }
   }
 }

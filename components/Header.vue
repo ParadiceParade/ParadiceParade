@@ -16,7 +16,7 @@
       <Button link> Search </Button>
       <Button link> Saved </Button>
       <Button link> Profile </Button>
-      <Button link title="cart" class="text-lg">
+      <Button link title="cart" class="text-lg" @click="$openCart">
         <MdiCart />
 
         <span class="text-sm">0</span>
