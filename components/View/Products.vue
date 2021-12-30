@@ -23,7 +23,7 @@
       <div>
         <Button link @click="openFilter">
           Filter
-          <MdiFilter />
+          <Component :is="filters.length ? 'MdiFilter' : 'MdiFilterCheck'" />
         </Button>
 
         <!-- <Button
