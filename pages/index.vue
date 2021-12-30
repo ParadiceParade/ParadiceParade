@@ -1,7 +1,19 @@
 <template>
-  <Tutorial/>
+  <article class="min-h-screen">
+    <ShopCampaigns />
+    <ShopNewArrivals />
+    <ShopCategories />
+    <ShopItemsOnSale />
+  </article>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'HomePage',
+  head() {
+    return {
+      title: 'Shop'
+    }
+  }
+}
 </script>

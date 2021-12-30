@@ -1,0 +1,77 @@
+<template>
+  <div
+    class="h-[32px] text-white bg-black flex justify-between items-center px-4"
+  >
+    <Button
+      link
+      title="change currency"
+      class="uppercase"
+      @click="changeCurrency"
+    >
+      {{ currency.code }}
+      <MdiChevronDown />
+    </Button>
+
+    <div class="grid gap-x-1 items-center grid-flow-col h-full">
+      <Button to="/" link> Create account </Button>
+
+      <span class="h-[80%] w-[1px] border-l-[0.75px] border-opacity-30" />
+
+      <Button to="/" link> Sign in </Button>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+import { nextAnimFrame } from '~/utils/main'
+
+export default {
+  name: 'Banner',
+
+  computed: {
+    ...mapState(['currency'])
+  },
+
+  methods: {
+    async changeCurrency(e) {
+      const { bottom, left } = e.currentTarget.getBoundingClientRect()
+
+      await nextAnimFrame()
+
+      const menuPosition = {
+        top: bottom - 2,
+        left: left - 8
+      }
+
+      const menuSize = {
+        width: 124,
+        height: 188
+      }
+
+      this.$commit('UPDATE', {
+        path: 'menu',
+        value: {
+          style: {
+            ...menuPosition,
+            ...menuSize,
+            origin: 'top left'
+          },
+          component: 'ChangeCurrency',
+          contentClass: 'rounded-sm'
+        }
+      })
+
+      await this.$nextTick()
+
+      this.$commit('UPDATE', {
+        path: 'active',
+        innerPath: 'menu',
+        value: true
+      })
+    }
+  }
+}
+</script>
+
+<style></style>

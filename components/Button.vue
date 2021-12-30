@@ -1,0 +1,111 @@
+<script>
+export default {
+  name: 'Button',
+
+  props: {
+    link: Boolean,
+    overlay: Boolean,
+    icon: Boolean,
+    primary: Boolean,
+    tag: {
+      type: String,
+      default: 'button'
+    },
+    to: {
+      type: String,
+      default: undefined
+    },
+    size: {
+      type: String,
+      default: 'md'
+    }
+  },
+
+  computed: {
+    getTag() {
+      if (this.to) {
+        return 'nuxt-link'
+      }
+      return this.tag
+    }
+  },
+
+  render(h) {
+    return h(
+      this.getTag,
+      {
+        props: {
+          ...(this.$attrs || {}),
+          to: this.to
+        },
+        attrs: {
+          'data-btn': '',
+          ...this.$attrs
+        },
+        staticClass: 'root',
+        class: [
+          {
+            'link-btn underline-effect': this.link,
+            'ui-btn': !this.link
+          },
+          !this.link
+            ? {
+                sm: this.size == 'sm',
+                md: this.size == 'md',
+                lg: this.size == 'lg',
+                icon: this.icon,
+
+                primary: this.primary,
+
+                'border-[0.75px] border-white border-opacity-10 bg-white bg-opacity-10 hover:bg-opacity-20':
+                  this.overlay
+              }
+            : ''
+        ],
+        on: this.$listeners
+      },
+      [this.$slots.default]
+    )
+  }
+}
+</script>
+
+<style>
+.underline-effect[data-btn] {
+  @apply after:w-full after:absolute after:h-[1px] after:bg-primary-700 dark:after:bg-primary-500 after:opacity-0 after:bottom-0 after:translate-x-[-100%] hover:after:translate-x-0 hover:after:opacity-70 after:transform-gpu after:transition-all;
+}
+.root[data-btn] {
+  @apply inline-grid grid-flow-col gap-x-2 relative overflow-hidden isolate items-center justify-center;
+}
+
+.link-btn[data-btn] {
+  @apply opacity-90 hover:opacity-80 focus:opacity-[.85] active:opacity-70
+  text-[0.85em] lg:text-[0.9em] mx-2;
+}
+
+.ui-btn[data-btn] {
+  @apply outline-none focus:ring-[2px] ring-primary-900 dark:ring-primary-700 font-semibold;
+  width: fit-content;
+}
+
+.sm[data-btn] {
+  @apply px-3 h-[38px] text-sm rounded-sm;
+}
+
+.md[data-btn] {
+  @apply px-6 h-[48px] text-base rounded-md;
+}
+
+.lg[data-btn] {
+  @apply px-9 h-[56px] text-lg rounded-lg;
+}
+
+.icon[data-btn] {
+  @apply px-0 h-[44px] w-[44px] text-base rounded-full;
+}
+
+.primary[data-btn] {
+  @apply bg-primary-600 text-white dark:bg-primary-500 dark:text-black 
+  hover:bg-primary-700 active:bg-primary-800 dark:hover:bg-primary-600 dark:active:bg-primary-700;
+}
+</style>

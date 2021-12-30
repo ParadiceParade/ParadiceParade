@@ -1,25 +1,63 @@
+const description = 'Shop PRD'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'paradiceparade',
+    titleTemplate: '%s - Paradice Parade',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Discover your favourite recipes!'
+      },
+      { name: 'format-detection', content: 'telephone=no' },
+      {
+        hid: 'twitter-app-country',
+        property: 'twitter:app:country',
+        content: 'NG'
+      },
+      {
+        hid: 'twitter-site',
+        property: 'twitter:site',
+        content: '@c4benn'
+      },
+      {
+        hid: 'twitter-image',
+        property: 'twitter:image',
+        content: '~static/icon.png'
+      },
+      {
+        hid: 'twitter-card',
+        property: 'twitter:card',
+        content: 'summary_large_image'
+      },
+      {
+        hid: 'twitter-title',
+        property: 'twitter:title',
+        content: description
+      },
+      {
+        hid: 'twitter-desc',
+        property: 'twitter:description',
+        content: description
+      }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/icon.png'
+      }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
+  plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -29,7 +67,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
+    '@nuxtjs/tailwindcss'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -37,11 +75,43 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
+    '@nuxtjs/pwa'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: '/api/v1',
+    prefix: '',
+    retry: true,
+    credentials: true,
+    debug: true,
+    headers: {
+      Accept: 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json'
+    }
+  },
+
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.BROWSER_BASE_URL
+    },
+    baseURL: process.env.BASE_URL
+  },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.BASE_URL
+    },
+    apiSecret: process.env.API_SECRET
+  },
+
+  cloudinary: {
+    useComponent: true,
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -51,6 +121,10 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  }
+  build: {},
+
+  server: {
+    port: 3000, // default: 3000
+    host: '0.0.0.0' // default: localhost
+  } // other configs
 }
