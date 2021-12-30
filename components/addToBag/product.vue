@@ -251,10 +251,20 @@
               Share
             </h2>
 
-            <div class="mt-4 space-y-6">
-              <p class="text-sm text-gray-600 dark:text-gray-300">
-                {{ product.care }}
-              </p>
+            <div
+              class="mt-4 justify-start items-center grid grid-flow-col gap-x-2 lg:gap-x-3"
+            >
+              <a
+                v-for="(item, i) in shareLinks"
+                :key="i"
+                :title="item.title"
+                href="#"
+              >
+                <Component
+                  :is="item.icon"
+                  class="opacity-60 hover:opacity-80 active:opacity-90 text-2xl cursor-pointer"
+                />
+              </a>
             </div>
           </div>
         </div>
@@ -339,7 +349,22 @@ export default {
     product,
     selectedColor: product.colors[0],
     selectedSize: product.sizes[2],
-    saved: false
+    saved: false,
+
+    shareLinks: [
+      {
+        icon: 'MdiFacebook',
+        title: 'facebook'
+      },
+      {
+        icon: 'MdiInstagram',
+        title: 'instagram'
+      },
+      {
+        icon: 'MdiTwitter',
+        title: 'twitter'
+      }
+    ]
   }),
 
   computed: {
