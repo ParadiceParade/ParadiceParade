@@ -29,6 +29,6 @@ export default function state() {
 
     appLoading: false,
 
-    cart: []
+    cart: [1]
   }
 }

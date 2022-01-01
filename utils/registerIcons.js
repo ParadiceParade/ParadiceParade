@@ -34,6 +34,8 @@ import copyError from 'vue-material-design-icons/ClipboardAlert.vue'
 import facebook from 'vue-material-design-icons/Facebook.vue'
 import instagram from 'vue-material-design-icons/Instagram.vue'
 import twitter from 'vue-material-design-icons/Twitter.vue'
+
+import empty from 'vue-material-design-icons/SetNone.vue'
 import { capitalize } from './main'
 
 export default function registerComponents(Vue) {
@@ -68,7 +70,8 @@ export default function registerComponents(Vue) {
     copyError,
     facebook,
     instagram,
-    twitter
+    twitter,
+    empty
   }
 
   Object.entries(icons).forEach((entry) => {

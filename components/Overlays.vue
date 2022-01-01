@@ -9,7 +9,7 @@
       v-if="appLoading"
       title="loading, please wait"
       tabindex="1"
-      class="fixed w-full h-full flex items-center justify-center bg-black bg-opacity-70 dark:bg-opacity-70 fade-appear z-50 outline-none pointer-events-auto"
+      class="fixed w-full h-full flex items-center justify-center bg-black bg-opacity-70 dark:bg-opacity-70 fade-appear z-50 outline-none pointer-events-auto text-white touch-action-none"
       v-on="events"
     >
       <Loader />

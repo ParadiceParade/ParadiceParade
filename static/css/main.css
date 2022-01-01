@@ -203,3 +203,7 @@
 .slide-x-leave-to {
   will-change: opacity, transform !important;
 }
+
+.touch-action-none {
+  touch-action: none;
+}

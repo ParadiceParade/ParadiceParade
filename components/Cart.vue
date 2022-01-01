@@ -1,7 +1,9 @@
 <template>
-  <div class="w-screen max-w-md h-full overflow-y-auto isolate">
+  <div
+    class="w-screen max-w-md h-full overflow-y-auto isolate grid grid-rows-[auto 1fr] sm:border-l-[0.75px] border-black dark:border-white border-opacity-10 dark:border-opacity-10 content-start"
+  >
     <header
-      class="flex items-center justify-between h-[56px] sm:h-[64px] px-3 sm:px-4 border-b-[0.75px] border-black dark:border-white border-opacity-10 dark:border-opacity-10 sticky top-0 bg-white dark:bg-gray-900 z-10"
+      class="flex items-center justify-between h-[56px] sm:h-[64px] px-3 sm:px-4 border-b-[0.75px] border-black dark:border-white border-opacity-10 dark:border-opacity-10"
     >
       <h2 class="font-semibold">Shopping cart</h2>
 
@@ -11,13 +13,14 @@
     </header>
 
     <div v-if="!cart.length">
-      <h3 class="font-bold text-xl px-3 text-center mt-12">
-        Your cart is empty
-      </h3>
+      <div class="mt-12 mb-4 flex justify-center">
+        <MdiEmpty class="text-6xl opacity-70" />
+      </div>
+      <h3 class="font-bold text-xl px-3 text-center">Your cart is empty</h3>
     </div>
 
-    <div v-else class="h-full flex flex-col overflow-y-scroll">
-      <div class="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
+    <div v-else class="h-full grid grid-rows-[1fr,auto] overflow-y-scroll">
+      <div class="flex-1 pb-6 overflow-y-auto px-4 sm:px-6">
         <div class="mt-8">
           <div class="flow-root">
             <ul
@@ -94,7 +97,9 @@
         <div class="mt-6">
           <Button primary class="w-full">Checkout</Button>
         </div>
-        <div class="mt-6 flex justify-center text-sm text-center text-gray-500">
+        <div
+          class="mt-6 flex justify-center text-sm text-center text-gray-500 dark:text-gray-300"
+        >
           <p>
             or
             <Button
@@ -129,6 +134,30 @@ const products = [
   },
   {
     id: 2,
+    name: 'Medium Stuff Satchel',
+    href: '#',
+    color: 'Blue',
+    price: '$32.00',
+    quantity: 1,
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
+    imageAlt:
+      'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.'
+  },
+  {
+    id: 21,
+    name: 'Medium Stuff Satchel',
+    href: '#',
+    color: 'Blue',
+    price: '$32.00',
+    quantity: 1,
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
+    imageAlt:
+      'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.'
+  },
+  {
+    id: 231,
     name: 'Medium Stuff Satchel',
     href: '#',
     color: 'Blue',

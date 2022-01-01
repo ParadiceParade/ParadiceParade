@@ -102,6 +102,10 @@ export default {
     onAfterEnter(e) {
       e.focus({ preventScroll: true })
 
+      document.documentElement.style.setProperty(
+        '--scroll-bar-width',
+        `${window.innerWidth - document.documentElement.clientWidth}`
+      )
       document.documentElement.classList.add('dialog-active')
     },
 
@@ -112,6 +116,7 @@ export default {
     onAfterLeave() {
       if (!this.dialogActive) {
         this.$commit('UPDATE', { path: 'dialog', value: {} })
+        document.documentElement.style.removeProperty('--scroll-bar-width')
         document.documentElement.classList.remove('dialog-active')
       }
     },

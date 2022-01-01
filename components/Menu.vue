@@ -100,6 +100,12 @@ export default {
 
     onAfterEnter(e) {
       e.focus()
+      document.documentElement.style.setProperty(
+        '--scroll-bar-width',
+        `${window.innerWidth - document.documentElement.clientWidth}px`
+      )
+
+      document.documentElement.classList.add('menu-active')
     },
 
     onLeave() {
@@ -107,10 +113,11 @@ export default {
     },
 
     onAfterLeave() {
-      this.$commit('UPDATE', {
-        path: 'menu',
-        value: {}
-      })
+      if (!this.menuActive) {
+        this.$commit('UPDATE', { path: 'menu', value: {} })
+        document.documentElement.style.removeProperty('--scroll-bar-width')
+        document.documentElement.classList.remove('menu-active')
+      }
     },
 
     onClick(e) {

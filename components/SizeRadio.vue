@@ -9,7 +9,7 @@
       :for="`size-radio-${item.title}`.toLowerCase()"
       class="group relative border border-black dark:border-white dark:border-opacity-10 border-opacity-10 rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none sm:flex-1 sm:py-6 bg-white dark:bg-gray-900 shadow-sm text-gray-900 dark:text-gray-100 cursor-pointer undefined"
       :class="{
-        'ring-primary-700 dark:ring-primary-500 ring ring-offset-1':
+        'ring-primary-700 dark:ring-primary-500 ring ring-offset-1 ring-offset-white dark:ring-offset-black':
           item.title == activeItem.title,
         'opacity-30 pointer-events-none': item.disabled
       }"
