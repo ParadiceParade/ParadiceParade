@@ -47,7 +47,7 @@
             <h3 class="text-2xl font-bold">Paradice is a state of mind</h3>
             <h4 class="opacity-80">August, 2020</h4>
 
-            <Button class="mt-4" overlay> Shop campaign </Button>
+            <Button class="mt-4" overlay text="Shop campaign" />
           </div>
         </Transition>
       </div>

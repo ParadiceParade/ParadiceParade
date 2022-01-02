@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-screen max-w-md h-full overflow-y-auto isolate grid grid-rows-[auto 1fr] sm:border-l-[0.75px] border-black dark:border-white border-opacity-10 dark:border-opacity-10 content-start"
+    class="w-screen max-w-md h-full overflow-y-auto isolate grid grid-rows-[auto 1fr] sm:border-l-[0.75px] border-black dark:border-white border-opacity-10 dark:border-opacity-10 content-start can-hover:hidden"
   >
     <header
       class="flex items-center justify-between h-[56px] sm:h-[64px] px-3 sm:px-4 border-b-[0.75px] border-black dark:border-white border-opacity-10 dark:border-opacity-10"

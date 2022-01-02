@@ -1,4 +1,3 @@
-const { canHover } = require('./tailwind/plugins')
 const theme = require('./tailwind/theme')
 
 module.exports = {
@@ -20,6 +19,6 @@ module.exports = {
       ringOpacity: ['dark']
     }
   },
-  plugins: [require('@tailwindcss/aspect-ratio'), canHover],
+  plugins: [require('@tailwindcss/aspect-ratio')],
   important: true
 }

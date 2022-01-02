@@ -13,11 +13,11 @@
     </Button>
 
     <div class="grid gap-x-1 items-center grid-flow-col h-full">
-      <Button to="/" link> Create account </Button>
+      <Button to="/" link text="Create account" />
 
       <span class="h-[80%] w-[1px] border-l-[0.75px] border-opacity-30" />
 
-      <Button to="/" link> Sign in </Button>
+      <Button to="/" link text="Sign in" />
     </div>
   </div>
 </template>

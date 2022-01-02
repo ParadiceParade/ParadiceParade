@@ -11,6 +11,10 @@ export default {
       type: String,
       default: 'button'
     },
+    text: {
+      type: String,
+      default: undefined
+    },
     to: {
       type: String,
       default: undefined
@@ -65,7 +69,7 @@ export default {
         on: this.$listeners
       },
       [
-        this.$slots.default
+        this.text || this.$slots.default
         // h(
         //   'div',
         //   {

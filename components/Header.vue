@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-[64px] bg-white dark:bg-gray-900 top-0 flex justify-between items-center px-4 z-10"
+    class="h-[64px] bg-white dark:bg-gray-900 top-0 flex justify-between items-center px-4 z-10 border-b-[0.75px] border-gray-200 dark:border-gray-800"
   >
     <NuxtLink :title="logoTitle" to="/" class="w-[48px] h-[32px]">
       <Img
