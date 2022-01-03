@@ -92,7 +92,9 @@
           id="show-av-items"
           v-model="showAvailableItems"
           tabindex="1"
-          class="group-focus-within:ring ring-primary-800 dark:ring-primary-600"
+class="rounded-full ring-offset-2 ring-offset-white dark:ring-offset-black
+group-focus-within:ring ring-primary-800 dark:ring-primary-600"
+
         />
       </div>
     </div>
