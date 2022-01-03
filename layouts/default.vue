@@ -1,6 +1,8 @@
 <template>
   <main
-    class="min-h-screen bg-primary-50 bg-opacity-80 dark:bg-black dark:bg-opacity-[.925] dark:text-white"
+class="min-h-screen bg-primary-50 bg-opacity-80 dark:bg-[#121212]
+dark:text-white"
+
     @touchstart="() => {}"
   >
     <Banner />
