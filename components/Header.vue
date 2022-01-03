@@ -26,8 +26,9 @@
         class="h-[80%] w-[1px] border-l dark:border-l-[0.75px] dark:border-opacity-30"
       />
 
-      <Button :key="theme.is" class="fade-appear" icon @click="toggleTheme">
-        <Component :is="themeIcon" />
+      <Button   icon @click="toggleTheme">
+        <Component :is="themeIcon" :key="theme.is"
+ class="fade-appear" />
       </Button>
     </div>
   </div>
