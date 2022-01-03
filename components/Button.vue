@@ -98,7 +98,9 @@ export default {
 }
 
 .ui-btn[data-btn] {
-  @apply outline-none focus:ring-[2px] ring-primary-900 dark:ring-primary-700 font-semibold;
+@apply outline-none focus:ring-[2px] ring-offset-white dark:ring-offset-black
+ring-offset-1 ring-primary-900 dark:ring-primary-700 font-semibold;
+
   width: fit-content;
 }
 
