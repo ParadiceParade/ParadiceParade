@@ -174,8 +174,9 @@ font-family: 'Fira Sans', sans-serif !important;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  height: stretch;
-  background-color: #fff;
+height: stretch;
+
+
   letter-spacing: 0.4px;
 }
 
@@ -245,6 +246,8 @@ font-family: 'Fira Sans', sans-serif !important;
   html {
     color-scheme: dark;
     color: #fff;
+background-color: #121212;
+
   }
 }
 
@@ -252,17 +255,23 @@ font-family: 'Fira Sans', sans-serif !important;
   html {
     color-scheme: light;
     color: #000;
+background-color: #fff;
+
   }
 }
 
 :root.light {
   color-scheme: light;
   color: #000;
+background-color: #fff;
+
 }
 
 :root.dark {
   color-scheme: dark;
   color: #fff;
+background-color: #121212;
+
 }
 
 button,
