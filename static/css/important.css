@@ -165,6 +165,8 @@ textarea {
 
 html {
   font-family: 'Barlow Semi Condensed', sans-serif !important;
+font-family: 'Fira Sans', sans-serif !important;
+
   /* font-family: 'Noto sans display', sans-serif !important; */
 
   -ms-text-size-adjust: 100%;
