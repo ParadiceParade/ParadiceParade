@@ -12,6 +12,18 @@
   display: none;
 }
 
+@media (pointer: fine) and (hover: hover) {
+  .show-scrollbar-on-hover:not(:hover) {
+    scrollbar-width: none;
+  }
+
+  .show-scrollbar-on-hover:not(:hover)::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+    display: none;
+  }
+}
+
 .will-change-transform {
   will-change: transform;
 }
@@ -182,7 +194,16 @@
 .slide-x-enter,
 .slide-x-leave-to {
   opacity: var(--fade, 0) !important;
-  transform: translate3d(var(--slide-x, 100%), 0, 0);
+}
+
+.slide-x-enter {
+  opacity: var(--fade, 0) !important;
+  transform: translate3d(var(--slide-x-enter, var(--slide-x, 100%)), 0, 0);
+}
+
+.slide-x-leave-to {
+  opacity: var(--fade, 0) !important;
+  transform: translate3d(var(--slide-x-leave, var(--slide-x, 100%)), 0, 0);
 }
 
 .slide-x-enter-active,
