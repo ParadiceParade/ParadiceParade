@@ -193,7 +193,7 @@ export default {
           component: 'ProductListFilter',
           transition: 'slide-x',
           contentClass:
-            'w-screen sm:w-[360px] xl:w-[500px] h-full right-0 bottom-0 sm:rounded-none'
+            'w-screen sm:w-[420px] xl:w-[520px] h-full right-0 bottom-0 sm:rounded-none'
         }
       })
 
