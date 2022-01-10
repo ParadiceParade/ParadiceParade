@@ -375,10 +375,11 @@ export function convertSeconds(val, fallback) {
   }
 }
 
-export function formatString(str) {
-  return capitalize(
-    `${str}`.replace(/\.|\?|!\s+\w/gi, (x) => `${x}`.toUpperCase())
-  )
+export function camelCase(val) {
+  if (typeof val === 'string') {
+    return val.replace(/-./g, (x) => x.toUpperCase()[1])
+  }
+  return val
 }
 
 export function capitalize(val) {
