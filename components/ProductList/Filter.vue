@@ -23,7 +23,7 @@
         <h3
           class="p-2 sm:p-3 relative cursor-pointer"
           :class="{
-            'bg-black dark:bg-white bg-opacity-5 dark:bg-opacity-5': item.active
+            'bg-black dark:bg-white bg-opacity-5 dark:bg-opacity-5': item.active,
           }"
           @click.self="item.active = !item.active"
         >
@@ -31,16 +31,13 @@
             class="w-full h-[48px] flex items-center justify-between px-3 hover:opacity-100 sm:text-[0.9rem]"
             :class="{
               'font-semibold opacity-90 ': item.active,
-              'opacity-75': !item.active
+              'opacity-75': !item.active,
             }"
             @click="item.active = !item.active"
           >
             {{ key }}
 
-            <Component
-              :is="item.active ? 'MdiMinus' : 'MdiPlus'"
-              class="opacity-75"
-            />
+            <Component :is="item.active ? 'MdiMinus' : 'MdiPlus'" class="opacity-75" />
           </button>
         </h3>
 
@@ -68,7 +65,7 @@
                 class="group-focus-within:ring text-2xl rounded ring-primary-800 dark:ring-primary-600"
                 :class="{
                   'text-primary-600 dark:text-primary-400': option.active,
-                  'opacity-75': !option.active
+                  'opacity-75': !option.active,
                 }"
               />
             </span>
@@ -92,9 +89,7 @@
           id="show-av-items"
           v-model="showAvailableItems"
           tabindex="1"
-class="rounded-full ring-offset-2 ring-offset-white dark:ring-offset-black
-group-focus-within:ring ring-primary-800 dark:ring-primary-600"
-
+          class="rounded-full ring-offset-2 ring-offset-white dark:ring-offset-black group-focus-within:ring ring-primary-800 dark:ring-primary-600"
         />
       </div>
     </div>
@@ -107,7 +102,7 @@ group-focus-within:ring ring-primary-800 dark:ring-primary-600"
         :key="i"
         v-bind="{
           ...action.attrs,
-          size: 'sm'
+          size: 'sm',
         }"
         :class="action.class"
         v-on="action.events"
@@ -121,10 +116,10 @@ group-focus-within:ring ring-primary-800 dark:ring-primary-600"
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { eventKey, nextAnimFrame } from '~/utils/main'
+import { mapState } from "vuex";
+import { eventKey, nextAnimFrame } from "~/utils/main";
 export default {
-  name: 'ProductListFilter',
+  name: "ProductListFilter",
 
   data: () => ({
     collapsibles: {
@@ -132,160 +127,160 @@ export default {
         active: false,
         items: [
           {
-            title: 'Welcome to paradice',
-            active: false
+            title: "Welcome to paradice",
+            active: false,
           },
-          { title: 'Broken chains', active: false }
-        ]
+          { title: "Broken chains", active: false },
+        ],
       },
 
       Category: {
         active: false,
         items: [
           {
-            title: 'Shirts',
-            active: false
+            title: "Shirts",
+            active: false,
           },
-          { title: 'Shorts', active: false },
-          { title: 'Tees', active: false },
+          { title: "Shorts", active: false },
+          { title: "Tees", active: false },
           {
-            title: 'Sweatpants',
-            active: false
-          }
-        ]
+            title: "Sweatpants",
+            active: false,
+          },
+        ],
       },
 
       Color: {
         active: false,
         items: [
           {
-            title: 'Blue',
-            active: false
+            title: "Blue",
+            active: false,
           },
-          { title: 'Green', active: false },
-          { title: 'Black', active: false },
+          { title: "Green", active: false },
+          { title: "Black", active: false },
           {
-            title: 'Multicolor',
-            active: false
-          }
-        ]
+            title: "Multicolor",
+            active: false,
+          },
+        ],
       },
       Size: {
         active: false,
         items: [
-          { title: 'One size', active: false },
+          { title: "One size", active: false },
           {
-            title: 'SM',
-            active: false
+            title: "SM",
+            active: false,
           },
-          { title: 'MD', active: false },
-          { title: 'LG', active: false }
-        ]
-      }
+          { title: "MD", active: false },
+          { title: "LG", active: false },
+        ],
+      },
     },
 
-    showAvailableItems: false
+    showAvailableItems: false,
   }),
 
   computed: {
-    ...mapState(['productsList']),
+    ...mapState(["productsList"]),
 
     footerActions() {
       return [
         {
-          title: 'Reset',
+          title: "Reset",
           attrs: {
-            link: true
+            link: true,
           },
           events: {
-            click: this.resetFilters
+            click: this.resetFilters,
           },
-          class: 'ml-0'
+          class: "ml-0",
         },
         {
-          title: 'Apply filters',
+          title: "Apply filters",
           attrs: {
-            primary: true
+            primary: true,
           },
-          icon: 'MdiCheck',
+          icon: "MdiCheck",
           events: {
-            click: this.applyFilters
-          }
-        }
-      ]
+            click: this.applyFilters,
+          },
+        },
+      ];
     },
 
     sectionTitle() {
-      return this.$route.query.section
-    }
+      return this.$route.query.section;
+    },
   },
 
   created() {
-    const savedFilters = this.productsList.filters[this.sectionTitle] || {}
+    const savedFilters = this.productsList.filters[this.sectionTitle] || {};
 
     // check if there's a saved filter state,
     if (Object.keys(savedFilters).length) {
       // restore any saved filter from vuex;
       if (savedFilters.Availability) {
-        this.showAvailableItems = true
+        this.showAvailableItems = true;
       }
 
       const removeReactivity = (obj) => {
-        if (typeof obj != 'object') return {}
+        if (typeof obj != "object") return {};
 
-        const toString = JSON.stringify(obj)
+        const toString = JSON.stringify(obj);
 
-        return JSON.parse(toString)
-      }
+        return JSON.parse(toString);
+      };
 
       this.collapsibles = {
         ...this.collapsibles,
-        ...removeReactivity(savedFilters)
-      }
+        ...removeReactivity(savedFilters),
+      };
 
       // remove any possible non object saved to section's filter in vuex;
       for (const key in this.collapsibles) {
-        if (typeof this.collapsibles[key] != 'object') {
-          delete this.collapsibles[key]
+        if (typeof this.collapsibles[key] != "object") {
+          delete this.collapsibles[key];
         }
       }
     }
     // else expand the first filter
     else {
-      const firstFilter = Object.keys(this.collapsibles)[0]
+      const firstFilter = Object.keys(this.collapsibles)[0];
 
-      this.collapsibles[firstFilter].active = true
+      this.collapsibles[firstFilter].active = true;
     }
   },
 
   methods: {
     closeDialog() {
-      this.$commit('UPDATE', {
-        path: 'active',
-        innerPath: 'dialog',
-        value: false
-      })
+      this.$commit("UPDATE", {
+        path: "active",
+        innerPath: "dialog",
+        value: false,
+      });
     },
 
     resetFilters() {
       for (const key in this.collapsibles) {
-        const value = this.collapsibles[key]
+        const value = this.collapsibles[key];
 
-        if (typeof value == 'object') {
-          value.items.forEach((x) => (x.active = false))
+        if (typeof value == "object") {
+          value.items.forEach((x) => (x.active = false));
         }
       }
 
-      this.showAvailableItems = false
+      this.showAvailableItems = false;
     },
 
     async saveFilters() {
-      await this.$nextTick()
+      await this.$nextTick();
 
-      const filtered = {}
+      const filtered = {};
 
       if (this.showAvailableItems) {
-        filtered.Availability = true
+        filtered.Availability = true;
       }
 
       // create new entries of applied filters;
@@ -296,42 +291,41 @@ export default {
             (entry) =>
               // return only entries that have an item in entry[1].items
               // active;
-              typeof entry[1] == 'object' &&
-              entry[1].items.find((x) => x.active)
+              typeof entry[1] == "object" && entry[1].items.find((x) => x.active)
           ) || []
         ).map((entry) => [entry[0], { ...entry[1], active: true }])
-      )
+      );
 
       // assign entries to const filtered
-      Object.assign(filtered, appliedFilters)
+      Object.assign(filtered, appliedFilters);
 
-      await nextAnimFrame()
+      await nextAnimFrame();
 
-      return this.$commit('UPDATE', {
+      return this.$commit("UPDATE", {
         path: this.sectionTitle,
-        innerPath: 'productsList.filters',
-        value: filtered
-      })
+        innerPath: "productsList.filters",
+        value: filtered,
+      });
     },
 
     async applyFilters() {
-      await this.saveFilters()
+      await this.saveFilters();
 
-      await this.$nextTick()
+      await this.$nextTick();
 
-      this.closeDialog()
+      this.closeDialog();
     },
 
     // save on ctrl + s
     async saveOnKeydown(e) {
-      const key = eventKey(e)
+      const key = eventKey(e);
 
-      if (key == 's' && e.ctrlKey) {
-        e.preventDefault()
+      if (key == "s" && e.ctrlKey) {
+        e.preventDefault();
 
-        await this.applyFilters()
+        await this.applyFilters();
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
