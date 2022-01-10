@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="toRender"
+    v-if="renderIf"
     class="absolute top-0 left-0 w-full h-full isolate grid justify-center items-center z-10"
     :class="{ 'pointer-events-auto': dialogActive }"
   >
@@ -16,7 +16,7 @@
     <Transition :name="transitionName" mode="out-in" v-on="transitionEvents">
       <div
         v-if="dialogActive"
-        :tabindex="dialogActive ? '1' : '-1'"
+        :tabindex="dialogActive ? '0' : '-1'"
         class="bg-white dark:bg-gray-900 absolute min-h-[128px] min-w-[128px] z-10 isolate shadow-xl focus:outline-none"
         :class="[
           { 'pointer-events-auto': dialogActive },
@@ -25,7 +25,10 @@
         style="--fade: 1"
         v-on="contentEvents"
       >
-        <Component :is="toRender" />
+        <Component 
+          :is="toRender" 
+          v-bind="contentProps"
+        />
       </div>
     </Transition>
   </div>
@@ -45,6 +48,16 @@ export default {
 
   computed: {
     ...mapState(['dialog', 'breakpoints']),
+    contentProps(){
+      return this.dialog.contentProps || {};
+    },
+    renderIf(){
+      if(!this.toRender) return false;
+
+      if(typeof this.dialog.renderIf == 'function'){
+        return this.dialog.renderIf()
+      } return true
+    },
     dialogActive() {
       return this.dialog.active
     },
@@ -83,10 +96,34 @@ export default {
   watch: {
     '$route.path'() {
       this.closeDialog()
+    },
+    renderIf(n){
+      if(!n) this.unmount()
     }
   },
 
+  beforeDestroy(){
+    this.unmount()
+  },
+
   methods: {
+    async unmount(){
+      this.$commit('UPDATE',{
+        path: 'dialog',
+        value: {
+          ...this.dialog,
+          active: false
+        }
+      })
+
+      await this.$nextTick();
+
+      this.onLeave()
+      
+      await this.$nextTick();
+
+      await this.onAfterLeave()
+    },
     toggle(value) {
       this.$commit('UPDATE', { path: 'active', innerPath: 'dialog', value })
     },
@@ -113,8 +150,13 @@ export default {
       this.previousActive && this.previousActive.focus()
     },
 
-    onAfterLeave() {
+    async onAfterLeave() {
       if (!this.dialogActive) {
+        if(typeof this.dialog.onAfterLeave == 'function'){
+          this.dialog.onAfterLeave()
+
+          await this.$nextTick();
+        }
         this.$commit('UPDATE', { path: 'dialog', value: {} })
         document.documentElement.style.removeProperty('--scroll-bar-width')
         document.documentElement.classList.remove('dialog-active')
