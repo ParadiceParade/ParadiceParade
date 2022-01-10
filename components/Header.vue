@@ -19,7 +19,9 @@
       <Button link title="cart" class="text-lg" @click="$openCart">
         <MdiCart />
 
-        <span class="text-sm">0</span>
+        <span class="text-[0.775rem] text-white -ml-2 rounded-full h-[18px] min-w-[18px] truncate flex items-center justify-center bg-primary-700 dark:bg-primary-500"
+        :class="{'px-1':false}"
+        >4</span>
       </Button>
 
       <span
