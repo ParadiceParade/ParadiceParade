@@ -9,6 +9,7 @@ export default {
     icon: Boolean,
     primary: Boolean,
     block: Boolean,
+    disabled: Boolean,
     tag: {
       type: String,
       default: 'button'
@@ -18,7 +19,7 @@ export default {
       default: undefined
     },
     to: {
-      type: String,
+      type: [String, Object],
       default: undefined
     },
     size: {
@@ -47,13 +48,13 @@ export default {
       this.getTag,
       {
         props: {
-          ...(this.$attrs || {}),
           to: this.to
         },
         attrs: {
           'data-btn': '',
-          tabindex: this.getTag !='button'?'0':undefined,
-          ...this.$attrs
+          tabindex: this.getTag !='button' && !this.disabled?'0':undefined,
+          disabled: this.disabled,
+          ...(this.$attrs || {}),
         },
         staticClass: 'root',
         class: [
