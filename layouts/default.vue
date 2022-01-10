@@ -1,6 +1,6 @@
 <template>
   <main
-class="min-h-screen bg-primary-50 bg-opacity-80 dark:bg-[#121212]
+class="min-h-screen bg-primary-50 dark:bg-[#121212]
 dark:text-white"
 
     @touchstart="() => {}"
@@ -141,13 +141,15 @@ rel: 'stylesheet' },
     Vue.prototype.$c4 = Vue.observable(new C4UiLib())
     Vue.prototype.$theme = Vue.prototype.$c4.theme
 
-    Vue.prototype.$openCart = async () => {
+    Vue.prototype.$openCart = async (config = {}) => {
       this.$commit('UPDATE', {
         path: 'dialog',
         value: {
-          component: 'Cart',
+          component: 'CartDialog',
           transition: 'slide-x',
-          contentClass: 'h-full right-0 bottom-0 sm:rounded-none'
+          contentClass: 'h-full right-0 bottom-0 sm:rounded-none',
+          contentProps: config.props,
+          ...config
         }
       })
 
