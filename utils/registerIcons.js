@@ -4,6 +4,8 @@ import menu from 'vue-material-design-icons/Menu.vue'
 import chevronDown from 'vue-material-design-icons/ChevronDown.vue'
 import chevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import chevronRight from 'vue-material-design-icons/ChevronRight.vue'
+import chevronDoubleRight from 'vue-material-design-icons/ChevronDoubleRight.vue'
+
 
 // import shoppingBag from 'vue-material-design-icons/Shopping.vue'
 import cart from 'vue-material-design-icons/Cart.vue'
@@ -55,6 +57,8 @@ export default function registerComponents(Vue) {
     chevronDown,
     chevronLeft,
     chevronRight,
+    chevronDoubleRight,
+
 
     // shoppingBag,
     cart,
