@@ -33,22 +33,45 @@
             Checkout
           </h2>
 
-          <nav class="h-full flex items-center ml-3 sm:ml-6 max-w-full overflow-x-auto hide-scrollbar">
+          <nav class="h-full flex items-center ml-2 pl-1 sm:ml-6 max-w-full overflow-x-auto hide-scrollbar">
             <ul class="grid grid-flow-col gap-x-4 items-center pr-8">
               <li
                 v-for="(step, i) in steps"
                 :key="`step-${i}`"
                 class="grid items-center grid-flow-col gap-x-2 whitespace-nowrap"
               >
-                <span
-                  class="text-sm"
+                <Button
+                  class="text-sm mx-0"
+                  :class="{
+                    'text-gray-900 dark:text-white': currentStep > (i+1),
+                    'text-gray-600 dark:text-gray-400': currentStep < (i+1),
+                    'text-primary-700 dark:text-primary-400 font-medium': 
+                      currentStep == (i+1),
+                    'pointer-events-none': currentStep <= (i+1),
+                    'opacity-100': currentStep >= i+1
+                  }"
+                  :tag="currentStep <= (i+1) ? 'span' : 'NuxtLink'"
+                  :to="currentStep > (i+1) ? {
+                    query: {
+                      ...$route.query,
+                      step: i+1
+                    }
+                  } : undefined"
+                  link 
+                  underline
+                  :disabled="currentStep <= (i+1)"
+                  @click="updateStep(i+1)"
                 >
                   {{step.title}}
-                </span>
+                </Button>
 
-                <MdiChevronRight
+                <Component
+                  :is="currentStep > (i+1) ? 
+                    'MdiChevronDoubleRight' : 
+                    'MdiChevronRight'
+                  "
                   v-if="i < steps.length - 1"
-                  class="text-gray-600 dark:text-gray-400"
+                  class="text-gray-400 dark:text-gray-600"
                 />
               </li>
             </ul>
@@ -62,6 +85,7 @@
             class='grid max-w-2xl mx-auto px-3 sm:px-6 lg:px-0'>
             <Onboard 
               class="w-full max-w-[550px] mx-auto"
+              :initial-form="currentForm"
               @form-changed="onboardChanged"
             />
           </div>
@@ -100,8 +124,12 @@ export default {
   computed:{
     ...mapState(['breakpoints']),
 
+    currentForm(){
+      return this.$route.query.form
+    },
+
     currentStep(){
-      return this.$router.query.step;
+      return this.$route.query.step;
     },
 
     isMiniDevice(){
@@ -132,15 +160,28 @@ export default {
 
   beforeCreate(){
     if(!/^(1|2|3|4)$/.test(this.$route.query.step)){
+      const signIn = {
+        step: '1',
+        form: 'sign-in'
+      }
+
       this.$router.replace({
-        query: {
-          step: '1'
-        }
+        query: signIn
       })
     }
   },
 
   methods:{
+    updateStep(step){
+      if(this.currentStep == step) return;
+
+      this.$router.replace({
+        query:{
+          ...this.$route.query,
+          step,
+        }
+      })
+    },
     showSummary(){
       this.$openCart({
         contentProps:{
