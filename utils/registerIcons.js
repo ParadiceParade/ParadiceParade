@@ -36,10 +36,21 @@ import instagram from 'vue-material-design-icons/Instagram.vue'
 import twitter from 'vue-material-design-icons/Twitter.vue'
 
 import empty from 'vue-material-design-icons/SetNone.vue'
+import eye from 'vue-material-design-icons/eye.vue'
+import eyeOff from 'vue-material-design-icons/eyeOff.vue'
+
+import alert from 'vue-material-design-icons/Alert.vue'
+
+import circleOutline from 'vue-material-design-icons/CircleOutline.vue'
+import deleteIcon from 'vue-material-design-icons/Delete.vue'
+
 import { capitalize } from './main'
 
 export default function registerComponents(Vue) {
   const icons = {
+    alert,
+    delete: deleteIcon,
+    
     menu,
     chevronDown,
     chevronLeft,
@@ -71,7 +82,8 @@ export default function registerComponents(Vue) {
     facebook,
     instagram,
     twitter,
-    empty
+empty, eye, eyeOff, circleOutline
+
   }
 
   Object.entries(icons).forEach((entry) => {
