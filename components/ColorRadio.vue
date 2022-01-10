@@ -6,8 +6,8 @@
       :for="`color-radio-${item.title}`"
       class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none w-[fit-content]"
       :class="{
-        'ring-gray-400 dark:ring-gray-700 ring ring-offset-1':
-          item.title == activeItem.title
+'ring-primary-700 dark:ring-primary-500 ring-offset-white dark:ring-offset-black ring ring-offset-1': item.title == activeItem.title,
+
       }"
     >
       <input
@@ -23,7 +23,7 @@
       <div
         class="h-8 w-8 rounded-full border border-black dark:border-white border-opacity-10 dark:border-opacity-20"
         :style="{
-          background: item.code
+          background: item.code,
         }"
       >
         <svg
@@ -33,13 +33,7 @@
           preserveAspectRatio="none"
           stroke="currentColor"
         >
-          <line
-            x1="0"
-            y1="100"
-            x2="100"
-            y2="0"
-            vector-effect="non-scaling-stroke"
-          ></line>
+          <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke"></line>
         </svg>
       </div>
     </label>
@@ -48,36 +42,36 @@
 
 <script>
 export default {
-  name: 'ColorRadio',
+  name: "ColorRadio",
 
   model: {
-    props: 'vmodel',
-    event: 'onvmodel'
+    props: "vmodel",
+    event: "onvmodel",
   },
 
   props: {
     vmodel: {
       type: Object,
-      default: undefined
+      default: undefined,
     },
     items: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
 
   computed: {
     activeItem() {
-      return this.vmodel || this.items[0]
-    }
+      return this.vmodel || this.items[0];
+    },
   },
 
   methods: {
     onUpdate(item) {
-      !item.disabled && this.$emit('onvmodel', item)
-    }
-  }
-}
+      !item.disabled && this.$emit("onvmodel", item);
+    },
+  },
+};
 </script>
 
 <style></style>
