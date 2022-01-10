@@ -3,7 +3,7 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   screens: {
     xxs: '0',
-    xs: '249px',
+    xs: '349px',
     sm: '599px',
     md: '959px',
     lg: '1279px',
