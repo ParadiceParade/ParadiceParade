@@ -3,10 +3,12 @@ export default {
   name: 'Button',
 
   props: {
+    autofocus: Boolean,
     link: Boolean,
     overlay: Boolean,
     icon: Boolean,
     primary: Boolean,
+    block: Boolean,
     tag: {
       type: String,
       default: 'button'
@@ -34,6 +36,12 @@ export default {
     }
   },
 
+  mounted(){
+    if(this.autofocus){
+      this.$el.focus()
+    }
+  },
+
   render(h) {
     return h(
       this.getTag,
@@ -44,13 +52,15 @@ export default {
         },
         attrs: {
           'data-btn': '',
+          tabindex: this.getTag !='button'?'0':undefined,
           ...this.$attrs
         },
         staticClass: 'root',
         class: [
           {
             'link-btn underline-effect': this.link,
-            'ui-btn': !this.link
+            'ui-btn': !this.link,
+            'grid w-full': this.block
           },
           !this.link
             ? {
@@ -64,7 +74,9 @@ export default {
                 'border-[0.75px] border-white border-opacity-10 bg-white bg-opacity-10 hover:bg-opacity-20':
                   this.overlay
               }
-            : ''
+            : {
+              'primary-text': this.primary
+            }
         ],
         on: this.$listeners
       },
@@ -89,7 +101,7 @@ export default {
   @apply after:w-full after:absolute after:h-[1px] after:bg-primary-700 dark:after:bg-primary-500 after:opacity-0 after:bottom-0 after:translate-x-[-100%] hover:after:translate-x-0 hover:after:opacity-70 after:transform-gpu after:transition-all;
 }
 .root[data-btn] {
-  @apply inline-grid grid-flow-col gap-x-2 relative overflow-hidden isolate items-center justify-center;
+  @apply inline-grid grid-flow-col gap-x-2 relative overflow-hidden isolate items-center justify-center cursor-pointer;
 }
 
 .link-btn[data-btn] {
@@ -105,11 +117,11 @@ ring-offset-1 ring-primary-900 dark:ring-primary-700 font-semibold;
 }
 
 .sm[data-btn] {
-  @apply px-3 h-[38px] text-sm rounded-sm;
+  @apply px-3 h-[34px] text-[0.825rem] rounded-sm;
 }
 
 .md[data-btn] {
-  @apply px-6 h-[48px] text-base rounded-md;
+  @apply px-6 h-[44px] text-base rounded-md;
 }
 
 .lg[data-btn] {
@@ -117,11 +129,15 @@ ring-offset-1 ring-primary-900 dark:ring-primary-700 font-semibold;
 }
 
 .icon[data-btn] {
-  @apply px-0 h-[44px] w-[44px] text-base rounded-full;
+  @apply px-0 h-[38px] w-[38px] text-base rounded-full;
 }
 
 .primary[data-btn] {
   @apply bg-primary-600 text-white dark:bg-primary-500 dark:text-black 
   hover:bg-primary-700 active:bg-primary-800 dark:hover:bg-primary-600 dark:active:bg-primary-700;
+}
+
+.primary-text[data-btn]{
+  @apply text-primary-700 dark:text-primary-400;
 }
 </style>
