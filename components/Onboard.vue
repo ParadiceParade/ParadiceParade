@@ -11,7 +11,7 @@
 
 <script lang='ts'>
 import Vue from 'vue'
-import { kebabCase } from '~/utils/main';
+import { kebabCase, camelCase, capitalize } from '~/utils/main';
 
 const validForms = /SignIn|SignUp|Reset/;
 
@@ -39,8 +39,10 @@ export default Vue.extend({
     }),
 
     created(){
-        if(validForms.test(this.initialForm)){
-            this.component = `Form${this.initialForm}`
+        const parseInitialForm = capitalize(camelCase(this.initialForm));
+        
+        if(validForms.test(parseInitialForm)){
+            this.component = `Form${parseInitialForm}`
         }
     },
 
