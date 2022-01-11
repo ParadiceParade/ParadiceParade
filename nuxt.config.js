@@ -10,47 +10,47 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Discover your favourite recipes!'
+        content: 'Discover your favourite recipes!',
       },
       { name: 'format-detection', content: 'telephone=no' },
       {
         hid: 'twitter-app-country',
         property: 'twitter:app:country',
-        content: 'NG'
+        content: 'NG',
       },
       {
         hid: 'twitter-site',
         property: 'twitter:site',
-        content: '@c4benn'
+        content: '@c4benn',
       },
       {
         hid: 'twitter-image',
         property: 'twitter:image',
-        content: '~static/icon.png'
+        content: '~static/icon.png',
       },
       {
         hid: 'twitter-card',
         property: 'twitter:card',
-        content: 'summary_large_image'
+        content: 'summary_large_image',
       },
       {
         hid: 'twitter-title',
         property: 'twitter:title',
-        content: description
+        content: description,
       },
       {
         hid: 'twitter-desc',
         property: 'twitter:description',
-        content: description
-      }
+        content: description,
+      },
     ],
     link: [
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/icon.png'
-      }
-    ]
+        href: '/icon.png',
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -60,14 +60,14 @@ export default {
   plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [{ path: '~/components', extensions: ['vue'] }],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcssz
-'@nuxtjs/tailwindcss', 
+    '@nuxtjs/tailwindcss',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -75,7 +75,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -88,36 +88,36 @@ export default {
     headers: {
       Accept: 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   },
 
   publicRuntimeConfig: {
     axios: {
-      browserBaseURL: process.env.BROWSER_BASE_URL
+      browserBaseURL: process.env.BROWSER_BASE_URL,
     },
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.BASE_URL,
   },
 
   privateRuntimeConfig: {
     axios: {
-      baseURL: process.env.BASE_URL
+      baseURL: process.env.BASE_URL,
     },
-    apiSecret: process.env.API_SECRET
+    apiSecret: process.env.API_SECRET,
   },
 
   cloudinary: {
     useComponent: true,
     cloudName: process.env.CLOUDINARY_CLOUD_NAME,
     apiKey: process.env.CLOUDINARY_API_KEY,
-    apiSecret: process.env.CLOUDINARY_API_SECRET
+    apiSecret: process.env.CLOUDINARY_API_SECRET,
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
-    }
+      lang: 'en',
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -125,6 +125,6 @@ export default {
 
   server: {
     port: 3000, // default: 3000
-    host: '0.0.0.0' // default: localhost
-  } // other configs
+    host: '0.0.0.0', // default: localhost
+  }, // other configs
 }
