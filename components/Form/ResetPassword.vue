@@ -1,5 +1,5 @@
 <template>
-    <section class='max-w-[550px]'>
+    <section>
 
         <Transition name='slide-y' mode="out-in">
             <div :key="rootKey" style="--slide-y:-.35rem">
@@ -107,7 +107,7 @@
                 return [
                     {
                         attrs: {
-                            label: 'Email or username',
+                            label: `Email or username${!this.username ? '*':''}`,
                             modelValue: this.username,
                         },
                         class:['mb-6'],
