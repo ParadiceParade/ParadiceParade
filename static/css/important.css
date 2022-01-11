@@ -151,6 +151,8 @@ textarea {
   left: 0;
   border-radius: inherit;
   pointer-events: none;
+background-color: var(--pseudo-bg, initial);
+
 }
 
 *,
