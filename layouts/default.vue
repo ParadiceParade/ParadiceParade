@@ -25,6 +25,7 @@ dark:text-white"
 <script>
 import Vue from 'vue'
 import { mapState } from 'vuex'
+import smoothscroll from 'smoothscroll-polyfill';
 
 import { C4UiLib } from '../utils/framework'
 import breakpoints from '../utils/breakpoints'
@@ -170,6 +171,7 @@ rel: 'stylesheet' },
   beforeMount() {
     this.beforeMount()
     this.selfMounted = true
+    smoothscroll.polyfill();
   },
 
   mounted() {

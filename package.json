@@ -39,6 +39,7 @@
     "redirect-ssl": "^3.0.0",
     "sequelize": "^6.12.0-alpha.1",
     "session": "^0.1.0",
+    "smoothscroll-polyfill": "^0.4.4",
     "vue-material-design-icons": "^5.0.0",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.5.2",
