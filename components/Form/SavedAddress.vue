@@ -2,47 +2,64 @@
     <section>
         <h2
             :id="titleId"
+            class="text-xl mb-4"
         >
-            Saved address
+            {{title}}
         </h2>
 
         <div
             :aria-labelledby="titleId"
             role="radiogroup"
-            class="grid grid-cols-1 max-w-sm mx-auto"
+            class="grid mx-auto outline-none"
+            :class="{
+                'grid-cols-2 gap-4': !isMiniDevice,
+                'grid-cols-1 max-w-sm gap-y-4': isMiniDevice
+            }"
         >
-            <button
-                role="radio"
-                class="grid grid-flow-col grid-cols-[1fr,auto] gap-x-3 items-center px-5 py-4 border border-gray-300 dark:border-gray-700 rounded-md relative fill-before ring ring-offset-2 ring-offset-white dark:ring-offset-black ring-primary-700 dark:ring-primary-500"
-            >
-                <div class="text-left">
-                    <p class="truncate font-medium text-gray-900 dark:text-gray-50">
-                        Address name
-                    </p>
-
-                    <p class="truncate text-sm opacity-80">
-                        16 Raji Apoyin, Lagos, Nigeria
-                    </p>
-                </div>
-
-                <Component
-                    :is="'MdiRadioBoxMarked'"
-                    class="text-2xl"
-                    :class="{
-                        'opacity-60': false,
-                        'opacity-90 text-primary-700 dark:text-primary-500':true
-                    }"
-                />
-            </button>            
+            <RadioItem
+                v-for="i in 4"
+                :id="`input-${i}`"
+                :key="i"
+                :model-value="selected == i"
+                :initial-focus="i == 1"
+                @update:modelValue="selected = i"
+            />         
         </div>
+
+        <Button
+            v-if="selected"
+            link
+            primary
+            class="mt-6 -mb-2 lg:mx-0"
+        >
+            Edit address
+            <MdiEdit/>
+        </Button>
     </section>
 </template>
 
 <script>
+    import { mapState } from 'vuex';
+
     export default{
-        name: 'SavedAddress',   
+        name: 'SavedAddress',
+        
+        props:{
+            title:{
+                type:String,
+                default: 'Saved address'
+            }
+        },
+
+        data:()=>({
+            selected: null
+        }),
         
         computed:{
+            ...mapState(['breakpoints']),
+            isMiniDevice(){
+                return /sm|xs|xxs/.test(this.breakpoints.is)
+            },
             titleId(){
                 return `saved-address-${this._uid}`
             }
