@@ -35,7 +35,13 @@ export default {
 
   methods: {
     async changeCurrency(e) {
-      const { bottom, left } = e.currentTarget.getBoundingClientRect()
+      const currentTarget = e.currentTarget;
+
+      currentTarget.scrollIntoView();
+
+      await nextAnimFrame()
+
+      const { bottom, left } = currentTarget.getBoundingClientRect()
 
       await nextAnimFrame()
 
