@@ -45,6 +45,9 @@ import alert from 'vue-material-design-icons/Alert.vue'
 import circleOutline from 'vue-material-design-icons/CircleOutline.vue'
 import radioBoxBlank from 'vue-material-design-icons/RadioBoxBlank.vue'
 import radioBoxMarked from 'vue-material-design-icons/RadioBoxMarked.vue'
+import selectChevron from 'vue-material-design-icons/UnfoldMoreHorizontal.vue'
+
+import edit from 'vue-material-design-icons/Pencil.vue'
 
 import deleteIcon from 'vue-material-design-icons/Delete.vue'
 
@@ -52,8 +55,10 @@ import { capitalize } from './main'
 
 export default function registerComponents(Vue) {
   const icons = {
+    edit,
     alert,
     delete: deleteIcon,
+    selectChevron,
 
     menu,
     chevronDown,
