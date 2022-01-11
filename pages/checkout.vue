@@ -83,10 +83,13 @@
         >
           <div 
             class='grid max-w-2xl mx-auto px-3 sm:px-6 lg:px-0'>
-            <Onboard 
-              class="w-full max-w-[550px] mx-auto"
-              :initial-form="currentForm"
-              @form-changed="onboardChanged"
+            <Component 
+              :is="view.is"
+              v-bind="{
+                ...(view.props||{}),
+                ...(view.attrs||{})
+              }"
+              v-on="view.events"
             />
           </div>
         </div>
@@ -129,7 +132,7 @@ export default {
     },
 
     currentStep(){
-      return this.$route.query.step;
+      return parseInt(this.$route.query.step);
     },
 
     isMiniDevice(){
@@ -143,10 +146,19 @@ export default {
     steps(){
       return [
         {
-          title: 'Sign in'
+          title: 'Sign in',
+          is: 'Onboard',
+          class: "w-full max-w-[550px] mx-auto",
+          props: {
+            initialForm: "currentForm"
+          },
+          events:{
+            'form-changed': this.onboardChanged
+          }
         },
         {
-          title: 'Address'
+          title: 'Address',
+          is: 'FormAddress'
         },
         {
           title: 'Shipping'
@@ -155,6 +167,10 @@ export default {
           title: 'Payment'
         }
       ]
+    },
+
+    view(){
+      return this.steps[`${this.currentStep - 1}`]
     }
   },
 
