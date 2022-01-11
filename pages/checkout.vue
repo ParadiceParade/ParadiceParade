@@ -10,8 +10,7 @@
         <Button 
           v-if="showFab"
           titlle="open order sumary"
-          class="rounded-2xl w-[56px] h-[56px] md:w-[64px] md:h-[64px] fixed bottom-[28px] right-[28px] md:bottom-[32px] md:right-[32px] z-10 font-bold text-2xl shadow-xl"
-          primary
+          class="rounded-2xl w-[56px] h-[56px] md:w-[64px] md:h-[64px] fixed bottom-[28px] right-[28px] md:bottom-[32px] md:right-[32px] z-10 font-bold text-2xl shadow-2xl bg-black text-white dark:bg-primary-50 dark:text-black"
           @click="showSummary"
         >
           <MdiPlus/>
@@ -29,7 +28,7 @@
             class="pseudo w-7 -right-1 left-auto z-10 bg-gradient-to-r  dark:from-[#19191900] from-[#fff0] to-white dark:to-[#191919] dark:via-[#191919] via-white"
           />
 
-          <h2 class="text-xl xs:text-2xl ml-4 sm:ml-6 font-extrabold text-gray-800 dark:text-gray-200 relative fill-before before:h-[70%] before:top-[15%] before:border-r-[0.75px] before:border-gray-200 dark:before:border-gray-800 pr-3 md:pr-6 h-full flex items-center justify-end">
+          <h2 class="text-lg xs:text-xl sm:text-2xl ml-4 sm:ml-6 font-extrabold text-gray-800 dark:text-gray-200 relative fill-before before:h-[70%] before:top-[15%] before:border-r-[0.75px] before:border-gray-200 dark:before:border-gray-800 pr-3 md:pr-6 h-full flex items-center justify-end">
             Checkout
           </h2>
 
@@ -50,7 +49,7 @@
                     'pointer-events-none': currentStep <= (i+1),
                     'opacity-100': currentStep >= i+1
                   }"
-                  :tag="currentStep <= (i+1) ? 'span' : 'NuxtLink'"
+                  :tag="'span'"
                   :to="currentStep > (i+1) ? {
                     query: {
                       ...$route.query,
@@ -82,7 +81,8 @@
         <div
         >
           <div 
-            class='grid max-w-2xl mx-auto px-3 sm:px-6 lg:px-0'>
+            v-if="view"
+            class='grid justify-items-center max-w-2xl mx-auto px-3 sm:px-6 lg:px-0'>
             <Component 
               :is="view.is"
               v-bind="{
@@ -98,7 +98,7 @@
       <div 
         v-if="!isMiniDevice"
         class="max-w-md w-screen max-h-screen lg:sticky lg:top-0 border-l-[0.75px] border-gray-200 dark:border-gray-800 hidden lg:block">
-          <CartList
+          <LazyCartList
             is-checkout
             class="w-full"
           />
@@ -147,10 +147,10 @@ export default {
       return [
         {
           title: 'Sign in',
-          is: 'Onboard',
-          class: "w-full max-w-[550px] mx-auto",
+          is: 'LazyOnboard',
           props: {
-            initialForm: "currentForm"
+            contentClass: "w-full max-w-[550px] mx-auto",
+            initialForm: this.currentForm
           },
           events:{
             'form-changed': this.onboardChanged
@@ -158,7 +158,7 @@ export default {
         },
         {
           title: 'Address',
-          is: 'FormAddress'
+          is: 'LazyFormAddress'
         },
         {
           title: 'Shipping'
