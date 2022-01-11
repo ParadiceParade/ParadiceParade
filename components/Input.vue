@@ -162,7 +162,8 @@ export default {
     return div(
       {
         attrs: {
-          ...scoping
+          ...scoping,
+          'data-value': this.modelValue
         },
         class: [
           'root',
