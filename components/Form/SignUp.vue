@@ -30,7 +30,7 @@
                 }"
             >
             
-                <Component :is="field.checked ? 'MdiCheck' : 'MdiCircleOutline'"/>
+                <Component :is="field.checked ? 'MdiCheck' : 'MdiRadioBoxBlank'"/>
                 
                 {{field.title}}
             </div>
