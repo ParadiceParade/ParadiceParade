@@ -62,7 +62,7 @@
                 return [
                     {
                         attrs: {
-                            label: 'Email or username',
+                            label: `Email or username${!this.username ? '*':''}`,
                             modelValue: this.username,
                         },
                         class:['mb-4'],
@@ -75,7 +75,7 @@
 
                     {
                         attrs: {
-                            label: 'Password',
+                            label: `Password${!this.password ? '*':''}`,
                             type:'password',
                             modelValue: this.password,
                         },
