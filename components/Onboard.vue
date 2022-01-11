@@ -1,9 +1,10 @@
 <template>
     <Transition :name="'slide-y'" mode="out-in">
         <Component 
-            :is="component" 
+            :is="lazyComponent" 
             :title="title" 
-            style="--slide-y: .35rem" 
+            style="--slide-y:.35rem"
+            :class="contentClass"
             @change-form="changeForm" 
         />
     </Transition>
@@ -19,6 +20,10 @@ export default Vue.extend({
     name: 'Onboard',
 
     props:{
+        contentClass:{
+            type: [String, Object, Array],
+            default: undefined
+        },
         title: {
             type:String,
             default: undefined
@@ -37,6 +42,12 @@ export default Vue.extend({
     data:()=>({
         component: 'FormSignIn'
     }),
+
+    computed: {
+        lazyComponent(){
+            return `Lazy${this.component}`
+        }
+    },
 
     created(){
         const parseInitialForm = capitalize(camelCase(this.initialForm));
