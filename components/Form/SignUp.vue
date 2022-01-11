@@ -1,5 +1,5 @@
 <template>
-  <section class="max-w-[550px]">
+  <section>
 
     <Form name='sign-in' action="." submit-text='Sign up' class="py-6 px-4 bg-white dark:bg-[#222222] rounded-lg border-[0.75px] border-gray-200 dark:border-gray-700 dark:border-opacity-60 shadow-lg">
         <h2 class="font-medium text-xl mb-4 px-2">
@@ -108,7 +108,7 @@
                 return [
                     {
                         attrs: {
-                            label: 'Email',
+                            label: `Email${!this.email ? '*':''}`,
                             type:'email',
                             modelValue: this.email,
                         },
@@ -121,7 +121,7 @@
 
                     {
                         attrs: {
-                            label: 'Username',
+                            label: `Username${!this.username ? '*':''}`,
                             modelValue: this.username,
                         },
                         events: {
@@ -134,7 +134,7 @@
                     {
                         class:'mb-1',
                         attrs: {
-                            label: 'Password',
+                            label: `Password${!this.password ? '*':''}`,
                             type:'password',
                             modelValue: this.password,
                         },
@@ -151,7 +151,7 @@
                 return [{
                     class:'mb-6',
                     attrs: {
-                        label: 'Confirm password',
+                        label: `Confirm password${!this.confirmPassword ? '*':''}`,
                         type:'password',
                         modelValue: this.confirmPassword,
                     },
