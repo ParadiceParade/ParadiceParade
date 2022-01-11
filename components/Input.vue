@@ -16,6 +16,10 @@ export default {
       type: Array,
       default: undefined
     },
+    inputClass:{
+      type:Array,
+      default: undefined
+    },
     required: Boolean,
     placeholder: {
       type: String,
@@ -53,7 +57,8 @@ export default {
       type: String,
       default: undefined
     },
-    disabled: Boolean
+    disabled: Boolean,
+    hideCaret: Boolean
   },
 
   emits: ['update:modelValue'],
@@ -192,104 +197,120 @@ export default {
             ]
           },
           [
-            label(
-              {
+            div({
+              staticClass: 'container',
+              attrs:{
+                ...scoping
+              }
+            },[
+              label(
+                {
+                  attrs: {
+                    ...scoping,
+                    for: id
+                  },
+                  staticClass: 'label text-gray-700 dark:text-gray-300 text-[0.925rem]',
+                  class: [
+                    {
+                      'opacity-60': this.focused || vmodel
+                    }
+                  ]
+                },
+                this.label
+              ),
+
+              h(textarea ? 'textarea' : 'input', {
+                ref: 'input',
+                staticClass:'input',
+                class: [
+                  this.inputClass,
+                  {
+                    textarea,
+                    'has-value': vmodel,
+                    'pr-[calc(32px+0.75rem)]': this.type == 'password',
+                    'hide-caret': this.hideCaret
+                  }
+                ],
                 attrs: {
                   ...scoping,
-                  for: id
+
+                  ...this.$attrs,
+
+                  value: vmodel,
+                  pattern: this.pattern,
+                  required: this.required,
+                  placeholder: this.placeholder,
+                  type: isPassword
+                    ? this.showPassword
+                      ? 'text'
+                      : 'password'
+                    : this.type,
+                  disabled: this.disabled
                 },
-                staticClass: 'label text-gray-700 dark:text-gray-300 text-[0.925rem]',
-                class: [
-                  {
-                    'opacity-60': this.focused || vmodel
-                  }
-                ]
-              },
-              this.label
-            ),
-
-            h(textarea ? 'textarea' : 'input', {
-              ref: 'input',
-
-              class: [
-                'input',
-                {
-                  textarea,
-                  'has-value': vmodel,
-                  'pr-[calc(32px+0.75rem)]': this.type == 'password'
-                }
-              ],
-              attrs: {
-                ...scoping,
-
-                ...this.$attrs,
-
-                value: vmodel,
-                pattern: this.pattern,
-                autocomplete: this.autocomplete,
-                required: this.required,
-                placeholder: this.placeholder,
-                id,
-                type: isPassword
-                  ? this.showPassword
-                    ? 'text'
-                    : 'password'
-                  : this.type,
-                disabled: this.disabled
-              },
-              domProps: {
-                value: vmodel
-              },
-              on: {
-                focus: () => {
-                  this.focused = true
-
-                  if (this.isPassword) {
-                    this.$emit('modelValue', '')
-                  }
+                domProps: {
+                  id,
+                  autocomplete: this.autocomplete,
+                  value: vmodel
                 },
-                blur: () => {
-                  this.focused = false
+                on: {
+                  ...this.$listeners,
+                  focus: (e) => {
+                    this.$emit('focus', e)
+                    this.focused = true
 
-                  this.inputDirtied = true
+                    if (this.isPassword) {
+                      this.$emit('modelValue', '')
+                    }
+                  },
+                  blur: (e) => {
+                    this.$emit('blur', e)
 
-                  this.getValidation()
-                },
-                input: (e) => {
-                  const value = e.currentTarget.value
+                    this.focused = false
 
-                  if (textarea) {
-                    let scrollHeight = this.$refs.input.scrollHeight
+                    this.inputDirtied = true
 
-                    scrollHeight != 96 &&
-                      this.$nextTick(() => {
-                        this.$refs.input.style.height = ''
-                        scrollHeight = this.$refs.input.scrollHeight
-                        requestAnimationFrame(() => {
-                          this.$refs.input.style.height = `${scrollHeight}px`
+                    this.getValidation()
+                  },
+                  input: (e) => {
+                    this.$emit('input', e)
+                    const value = e.currentTarget.value
+
+                    if (textarea) {
+                      let scrollHeight = this.$refs.input.scrollHeight
+
+                      scrollHeight != 96 &&
+                        this.$nextTick(() => {
+                          this.$refs.input.style.height = ''
+                          scrollHeight = this.$refs.input.scrollHeight
+                          requestAnimationFrame(() => {
+                            this.$refs.input.style.height = `${scrollHeight}px`
+                          })
                         })
-                      })
+                    }
+
+                    this.$emit('update:modelValue', value)
+
+                    this.manualValue = value
+
+                    e.currentTarget.setCustomValidity(getValidation.message)
                   }
-
-                  this.$emit('update:modelValue', value)
-
-                  this.manualValue = value
-
-                  e.currentTarget.setCustomValidity(getValidation.message)
                 }
-              }
-            }),
+              }),
+            ]),
+
+            this.$slots.append,
 
             isPassword && !this.disabled
               ? btn(
                   {
-                    key: `p-${this.showPassword}`,
                     props: { tag: 'div' },
                     attrs: { ...scoping },
                     staticClass:
                       'absolute right-2 min-w-[32px] p-0 w-[32px] h-[32px] min-h-[32px] rounded-full top-[50%] translate-y-[-50%]',
                     on: {
-                      click: () => {
+                      click: (e) => {
+                        e.stopPropagation();
+                        
                         this.showPassword = !this.showPassword
                         this.$emit('append-icon-click')
                       }
@@ -298,6 +319,7 @@ export default {
                   [
                     this.$slots.appendIcon ||
                       h(`Mdi${this.showPassword ? 'EyeOff' : 'Eye'}`, {
+                        key: `p-${this.showPassword}`,
                         class: 'opacity-70'
                       })
                   ]
@@ -346,7 +368,7 @@ export default {
   --ui-active-scale: translate3d(12px, 8px, 0) scale3d(0.95, 0.85, 1);
 }
 
-.root[data-input]:focus-within .main[data-input]::before {
+.main.focused[data-input]::before {
   opacity: 0.75;
   transform: scale3d(1, 1, 1);
 }
@@ -386,7 +408,7 @@ export default {
   opacity: 0.25;
 }
 
-.main[data-input]:focus-within::before {
+.main.focused[data-input]::before {
   opacity: 0.5;
 }
 
@@ -417,8 +439,8 @@ export default {
   pointer-events: none;
 }
 
-.main[data-input]:focus-within > .label[data-input],
-.main[data-input].has-value > .label[data-input] {
+.container[data-input]:focus-within > .label[data-input],
+.main[data-input].has-value .label[data-input] {
   transform: var(--ui-active-scale);
 }
 
