@@ -95,7 +95,7 @@ export default {
     },
 
     onBeforeEnter() {
-      this.previousActive = document.activeElement
+     this.previousActive = document.activeElement
     },
 
     onAfterEnter(e) {
