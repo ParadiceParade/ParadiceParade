@@ -6,7 +6,6 @@ import chevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import chevronRight from 'vue-material-design-icons/ChevronRight.vue'
 import chevronDoubleRight from 'vue-material-design-icons/ChevronDoubleRight.vue'
 
-
 // import shoppingBag from 'vue-material-design-icons/Shopping.vue'
 import cart from 'vue-material-design-icons/Cart.vue'
 import sun from 'vue-material-design-icons/WhiteBalanceSunny.vue'
@@ -44,6 +43,9 @@ import eyeOff from 'vue-material-design-icons/eyeOff.vue'
 import alert from 'vue-material-design-icons/Alert.vue'
 
 import circleOutline from 'vue-material-design-icons/CircleOutline.vue'
+import radioBoxBlank from 'vue-material-design-icons/RadioBoxBlank.vue'
+import radioBoxMarked from 'vue-material-design-icons/RadioBoxMarked.vue'
+
 import deleteIcon from 'vue-material-design-icons/Delete.vue'
 
 import { capitalize } from './main'
@@ -52,13 +54,12 @@ export default function registerComponents(Vue) {
   const icons = {
     alert,
     delete: deleteIcon,
-    
+
     menu,
     chevronDown,
     chevronLeft,
     chevronRight,
     chevronDoubleRight,
-
 
     // shoppingBag,
     cart,
@@ -86,8 +87,12 @@ export default function registerComponents(Vue) {
     facebook,
     instagram,
     twitter,
-empty, eye, eyeOff, circleOutline
-
+    empty,
+    eye,
+    eyeOff,
+    circleOutline,
+    radioBoxBlank,
+    radioBoxMarked,
   }
 
   Object.entries(icons).forEach((entry) => {
