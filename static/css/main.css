@@ -228,3 +228,7 @@
 .touch-action-none {
   touch-action: none;
 }
+
+.hide-caret {
+  caret-color: transparent;
+}
