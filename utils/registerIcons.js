@@ -50,6 +50,7 @@ import selectChevron from 'vue-material-design-icons/UnfoldMoreHorizontal.vue'
 import edit from 'vue-material-design-icons/Pencil.vue'
 
 import deleteIcon from 'vue-material-design-icons/Delete.vue'
+import lock from 'vue-material-design-icons/Lock.vue'
 
 import { capitalize } from './main'
 
@@ -59,6 +60,7 @@ export default function registerComponents(Vue) {
     alert,
     delete: deleteIcon,
     selectChevron,
+    lock,
 
     menu,
     chevronDown,
