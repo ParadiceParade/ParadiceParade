@@ -58,7 +58,9 @@
           Shipping and taxes calculated at checkout.
         </p>
         <div class="mt-6">
-          <Button primary class="w-full" @click="checkout">Checkout</Button>
+          <Button primary class="w-full gap-x-2" @click="checkout">
+          <MdiLock class="opacity-80"/>
+          Checkout</Button>
         </div>
         <div
           class="mt-6 flex justify-center text-sm text-center text-gray-500 dark:text-gray-300"
@@ -68,10 +70,12 @@
             <Button
               type="button"
               link
-              class="text-base text-gray-800 dark:text-gray-100"
+              class="text-base text-gray-800 dark:text-gray-100 group pr-1"
               @click="continuseShoping"
             >
-              Continue Shopping<span aria-hidden="true"> &rarr;</span>
+              Continue Shopping<span aria-hidden="true" 
+                class="group-hover:translate-x-1 transform-gpu transition-transform"
+              > &rarr;</span>
             </Button>
           </p>
         </div>
