@@ -1,7 +1,9 @@
 <script>
     import { mapState } from 'vuex';
 
-    import {isTop} from './utils';
+    import {isTop, transitionEvents} from './utils';
+
+    import props from './props';
 
     import {eventKey, nextAnimFrame} from '~/utils/main';
 
@@ -13,38 +15,13 @@
             event: 'update:modelValue',
         },
 
-        props:{
-            searchable: Boolean,
-            modelValue: {
-                type: [String, Number],
-                default: undefined
-            },
-            label:{
-                type: String,
-                required: true
-            },
-            name:{
-                type: String,
-                required: true
-            },
-            placeholder:{
-                type: String,
-                required: true
-            },
-            options:{
-                type: Array,
-                default: undefined
-            },
-            listClass:{
-                type: Array,
-                required: true
-            },
-        },
+        props,
 
         data:()=>({
             searchField: '',
             activatorFocused: false,
-            isTop: false
+            isTop: false,
+            transitioning: false,
         }),
 
         computed:{
@@ -54,12 +31,28 @@
             }
         },
 
+        watch:{
+            activatorFocused(n){
+                if(n){
+                    this.addClickAway()
+                }else {
+                    this.removeClickAway()
+                }
+            }
+        },
+
         created(){
             this.searchField = `${this.modelValue}`;
         },
 
+        beforeDestroy() {
+            this.removeClickAway()
+        },
+
         methods:{
             async openListBox(e){
+                if(this.transitioning || this.activatorFocused) return ;
+
                 this.searchField = `${this.modelValue}`;
 
                 this.isTop = isTop(e);
@@ -67,6 +60,25 @@
                 await nextAnimFrame();
 
                 this.activatorFocused = true
+            },
+            closeListBox(){
+                this.activatorFocused = false;
+            },
+            toggleClickAway(action){
+                document.documentElement[`${action}EventListener`](
+                    'click',
+                    this.closeListBox,
+                    { once: true }
+                )
+            },
+            addClickAway(){
+                // clear any possible active event;
+                this.removeClickAway();
+
+                this.toggleClickAway('add')
+            },
+            removeClickAway(){
+                this.toggleClickAway('remove')
             }
         },
 
@@ -85,6 +97,8 @@
 
             const ul = (d, c) => h('ul', d, c);
 
+            const li = (d, c) => h('li', d, c);
+
             const Icon = h('MdiSelectChevron')
 
             const Input = (d, c) => h('Input', d, c);
@@ -94,12 +108,13 @@
                     props:{
                         name: 'slide-y',
                         mode: 'out-in'
-                    }
+                    },
+                    on: transitionEvents.call(this)
                 },[
                     this.activatorFocused ?
                         ul({
                             staticClass: 
-                                'h-[200px] w-full absolute z-10 rounded-md border border-gray-200 dark:border-gray-800',
+                                'h-[200px] w-full absolute z-10 rounded-md border border-gray-300 dark:border-gray-800 overflow-y-auto',
                             class:[
                                 this.listClass || 'bg-white dark:bg-gray-900',
                                 {
@@ -109,14 +124,57 @@
                             ],
                             style:{
                                 '--slide-y': this.transitionConfig
+                            },
+                            on:{
+                                click:(e)=>{
+                                    e.stopPropagation()
+                                },
+                                mouseenter: ()=>{
+
+                                }
                             }
-                        },[])
+                        },[
+                            this.options.map((option, key)=>{
+                                return li({
+                                    key: `li-${key}`,
+                                    staticClass: 
+                                        'h-[32px] w-full cursor-pointer relative fill-before before:opacity-0 hover:before:opacity-10',
+                                    class:[{
+                                        'rounded-t-md': key == 0,
+                                        'rounded-b-md': key == this.options.length,
+                                    }],
+                                    style:{
+                                        '--pseudo-bg': 'currentColor'
+                                    },
+                                    on: {
+                                        '!click':()=>{
+                                            this.searchField = `${option}`;
+
+                                            this.$nextTick(()=>{
+                                                this.$emit(
+                                                    'update:modelValue',
+                                                    `${option}`
+                                                )
+                                            })
+                                        },
+                                        '!mouseenter': ()=>{
+                                            this.searchField = `${option}`;
+                                        }
+                                    } 
+                                },[
+                                    option
+                                ])
+                            })
+                        ])
                     :   null
                 ])
             ]
 
 
             return Root({
+                attrs:{
+                    'data-value': this.modelValue
+                },
                 staticClass: 'root relative',
             },[
                 Input({
@@ -138,21 +196,24 @@
                             this.searchField = e;
                         },
                         input: async e => {
-                            if(e.data && !this.activatorFocused){
+                            const canOpenList = e.data && !this.activatorFocused && !this.transitioning
+
+                            if(canOpenList){
                                 await this.openListBox(e)
                             }
                         },
                         click: async (e)=>{
+                            e.stopPropagation();
+                            
                             await this.openListBox(e)
                         },
-                        blur: ()=>{
-                            this.activatorFocused = false
-                        },
+                        focusout: this.closeListBox,
+                        blur: this.closeListBox,
                         keydown: e=>{
                             const key = eventKey(e);
 
                             if(key == 'esc'){
-                                this.activatorFocused = false
+                                this.closeListBox()
                             }
                         }
                     }
@@ -170,7 +231,7 @@
     }
 </script>
 
-<style >
+<style>
     .top-shadow{
         box-shadow: 0 -25px 50px -12px rgb(0 0 0 / 0.25);
     }
