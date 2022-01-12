@@ -7,3 +7,22 @@ export function isTop(evt) {
 
   return top > clientHeight - bottom
 }
+
+export function transitionEvents() {
+  const transitioned = () => (this.transitioning = false)
+  const transitioning = () => (this.transitioning = true)
+
+  const cancelled = () => {
+    this.closeListBox()
+    transitioned()
+  }
+
+  return {
+    beforeEnter: transitioning,
+    enterCancelled: cancelled,
+    afterEnter: transitioned,
+    beforeLeave: transitioned,
+    leaveCancelled: cancelled,
+    afterLeave: transitioned,
+  }
+}
