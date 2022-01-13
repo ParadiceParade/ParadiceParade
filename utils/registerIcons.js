@@ -8,6 +8,8 @@ import chevronDoubleRight from 'vue-material-design-icons/ChevronDoubleRight.vue
 
 // import shoppingBag from 'vue-material-design-icons/Shopping.vue'
 import cart from 'vue-material-design-icons/Cart.vue'
+import save from 'vue-material-design-icons/ContentSave.vue'
+
 import sun from 'vue-material-design-icons/WhiteBalanceSunny.vue'
 import moon from 'vue-material-design-icons/WeatherNight.vue'
 import arrowRightThin from 'vue-material-design-icons/ArrowRight.vue'
@@ -61,6 +63,7 @@ export default function registerComponents(Vue) {
     delete: deleteIcon,
     selectChevron,
     lock,
+    save,
 
     menu,
     chevronDown,
