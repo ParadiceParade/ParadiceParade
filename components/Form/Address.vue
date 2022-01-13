@@ -1,10 +1,24 @@
 <template>
-    <section>
-        <LazyFormSavedAddress title="Choose an address"/>
+    <section class="w-full">
+        <template v-if="savedAddress">
+            <LazyFormSavedAddress 
+                title="Choose an address"
+                @item-selected="updateSavedAddress"
+            />
 
-        <Divider class="my-8 lg:my-12 text-gray-700 dark:text-gray-300">
-            OR
-        </Divider>
+            <div
+                v-if="selectedSavedAddress"
+                class="px-4 pt-4"
+            >
+                <Button primary block>
+                    Use address
+                </Button>
+            </div>
+
+            <Divider class="my-8 lg:my-12 text-gray-700 dark:text-gray-300">
+                OR
+            </Divider>
+        </template>
 
         <h2
             class="text-xl mb-4"
@@ -19,5 +33,15 @@
 <script>
     export default{
         name: 'FormAddress',    
+        data:()=>({
+            savedAddress: true,
+            selectedSavedAddress: null
+        }),
+
+        methods:{
+            updateSavedAddress(e){
+                this.selectedSavedAddress = `${e}`;
+            }
+        }
     }
 </script>
