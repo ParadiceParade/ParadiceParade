@@ -8,7 +8,7 @@ export default {
     },
     submitText: {
       type: String,
-      default: 'Submit',
+      default: '',
     },
     submitData: {
       type: Object,
@@ -48,7 +48,7 @@ export default {
       },
       [
         this.$slots.default,
-        this.showSubmit
+        this.showSubmit && this.submitText
           ? submit(
               {
                 ...submitData,
@@ -58,6 +58,7 @@ export default {
                   ...(submitData?.props || {}),
                 },
                 attrs: {
+                  type: 'submit',
                   title: this.submitText.toLowerCase(),
                   ...(submitData?.attrs || {}),
                 },
