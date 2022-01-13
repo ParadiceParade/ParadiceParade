@@ -232,3 +232,9 @@
 .hide-caret {
   caret-color: transparent;
 }
+
+.transition-height {
+  transition: 0.25s ease height;
+  transform: translateZ(0);
+  position: relative;
+}
