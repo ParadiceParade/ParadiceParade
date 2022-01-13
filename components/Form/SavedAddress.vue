@@ -22,7 +22,10 @@
                 :key="i"
                 :model-value="selected == i"
                 :initial-focus="i == 1"
-                @update:modelValue="selected = i"
+                @update:modelValue="(
+                    selected = i, 
+                    $emit('item-selected', selected)
+                )"
             />         
         </div>
 
