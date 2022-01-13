@@ -1,4 +1,8 @@
 <script>
+import {eventKey} from '~/utils/main'
+
+const focusableTags = /button|nuxt-link|NuxtLink|a/
+
 export default {
   name: 'Button',
 
@@ -84,7 +88,33 @@ export default {
               'primary-text': this.primary
             }
         ],
-        on: this.$listeners
+        on:{
+          keydown:e=>{
+            this.$emit('keydown', e);
+
+            if(!focusableTags.test(this.tag)){
+              const key = eventKey(e);
+
+              if(/enter|space/.test(key)){
+                e.preventDefault();
+              }
+            }
+          },
+          keyup:e=>{
+            this.$emit('keydown', e);
+            
+            if(!focusableTags.test(this.tag)){
+              const key = eventKey(e);
+
+              if(/enter|space/.test(key)){
+                e.preventDefault();
+
+                this.$emit('click', e)
+              }
+            }
+          },
+          ...this.$listeners
+        }
       },
       [
         this.text || this.$slots.default
