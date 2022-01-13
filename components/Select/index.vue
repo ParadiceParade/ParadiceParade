@@ -1,11 +1,13 @@
 <script>
     import { mapState } from 'vuex';
 
-    import {isTop, transitionEvents} from './utils';
+    import {isTop} from './utils';
 
     import props from './props';
 
     import {eventKey, nextAnimFrame} from '~/utils/main';
+
+    let activeListBox = []
 
     export default {
         name: 'Select',
@@ -20,38 +22,47 @@
         data:()=>({
             searchField: '',
             activatorFocused: false,
-            isTop: false,
-            transitioning: false,
+            optionTransitioning: false,
+            // null, 1, -1
+            arrowStep: null,
+            listBoxState: ''
         }),
 
         computed:{
             ...mapState(['breakpoints']),
-            transitionConfig(){
-                return this.isTop ? '1rem' : '-1rem'
-            }
         },
 
         watch:{
             activatorFocused(n){
+                this.arrowStep = null;
                 if(n){
+                    this.register();
                     this.addClickAway()
                 }else {
                     this.removeClickAway()
+                    // this.focusInput()
                 }
             }
         },
 
-        created(){
-            this.searchField = `${this.modelValue}`;
-        },
-
         beforeDestroy() {
             this.removeClickAway()
+            this.unregister()
         },
 
         methods:{
+            unregister(){
+                activeListBox = activeListBox.filter(x=>x!=this._uid)
+            },
+            register(){
+                activeListBox = 
+                    [...new Set([...activeListBox, this._uid])]
+            },
+            focusInput(){
+                this.$refs.input.$refs.input.focus()
+            },
             async openListBox(e){
-                if(this.transitioning || this.activatorFocused) return ;
+                if(this.optionTransitioning || this.activatorFocused) return ;
 
                 this.searchField = `${this.modelValue}`;
 
@@ -79,6 +90,11 @@
             },
             removeClickAway(){
                 this.toggleClickAway('remove')
+            },
+            matchSearchField(){
+                this.$nextTick(()=>{
+                    this.searchField = `${this.modelValue}`
+                });
             }
         },
 
@@ -93,83 +109,15 @@
 
             const div = (d, c) => h('div', d, c);
 
-            const Transition = (d, c) => h('Transition', d, c);
-
-            const ul = (d, c) => h('ul', d, c);
-
-            const li = (d, c) => h('li', d, c);
-
             const Icon = h('MdiSelectChevron')
 
             const Input = (d, c) => h('Input', d, c);
 
-            const Listbox = [
-                Transition({
-                    props:{
-                        name: 'slide-y',
-                        mode: 'out-in'
-                    },
-                    on: transitionEvents.call(this)
-                },[
-                    this.activatorFocused ?
-                        ul({
-                            staticClass: 
-                                'h-[200px] w-full absolute z-10 rounded-md border border-gray-300 dark:border-gray-800 overflow-y-auto',
-                            class:[
-                                this.listClass || 'bg-white dark:bg-gray-900',
-                                {
-                                    'top-[100%] mt-2 shadow-2xl': !this.isTop,
-                                    'bottom-[100%] mb-2 top-shadow': this.isTop
-                                }
-                            ],
-                            style:{
-                                '--slide-y': this.transitionConfig
-                            },
-                            on:{
-                                click:(e)=>{
-                                    e.stopPropagation()
-                                },
-                                mouseenter: ()=>{
+            const Option = (d, c) => h('SelectOption', d, c);
 
-                                }
-                            }
-                        },[
-                            this.options.map((option, key)=>{
-                                return li({
-                                    key: `li-${key}`,
-                                    staticClass: 
-                                        'h-[32px] w-full cursor-pointer relative fill-before before:opacity-0 hover:before:opacity-10',
-                                    class:[{
-                                        'rounded-t-md': key == 0,
-                                        'rounded-b-md': key == this.options.length,
-                                    }],
-                                    style:{
-                                        '--pseudo-bg': 'currentColor'
-                                    },
-                                    on: {
-                                        '!click':()=>{
-                                            this.searchField = `${option}`;
+            const sharedID = `select-${this._uid}`
 
-                                            this.$nextTick(()=>{
-                                                this.$emit(
-                                                    'update:modelValue',
-                                                    `${option}`
-                                                )
-                                            })
-                                        },
-                                        '!mouseenter': ()=>{
-                                            this.searchField = `${option}`;
-                                        }
-                                    } 
-                                },[
-                                    option
-                                ])
-                            })
-                        ])
-                    :   null
-                ])
-            ]
-
+            const inputID = `select-input-${this._uid}`
 
             return Root({
                 attrs:{
@@ -178,12 +126,22 @@
                 staticClass: 'root relative',
             },[
                 Input({
+                    ref: 'input',
+                    attrs:{
+                        autocorrect: 'off',
+                        autocapitalize: 'off',
+                        spellcheck: 'false',
+                        role: 'combobox',
+                        'aria-autocomplete': 'list',
+                        'aria-expanded': this.activatorFocused ? 'true' : undefined,
+                        'aria-haspopup': 'true',
+                        'aria-owns': sharedID
+                    },
                     props:{
+                        id: this.inputID,
                         label: this.label,
                         placeholder: this.placeholder,
-                        modelValue: this.activatorFocused ?
-                            this.searchField 
-                            : `${this.modelValue}`,
+                        modelValue: `${this.modelValue}`,
                         type: 'search',
                         inputClass: [
                             'pr-[36px]'
@@ -192,47 +150,84 @@
                         hideCaret: !this.activatorFocused
                     },
                     on:{
-                        'update:modelValue': e =>{
-                            this.searchField = e;
-                        },
+                        // 'update:modelValue': e =>{
+                        //     this.searchField = e;
+                        // },
                         input: async e => {
-                            const canOpenList = e.data && !this.activatorFocused && !this.transitioning
+                            const canOpenList = e.data && !this.activatorFocused && !this.optionTransitioning
 
                             if(canOpenList){
                                 await this.openListBox(e)
                             }
                         },
                         click: async (e)=>{
-                            e.stopPropagation();
+                            if(this.activatorFocused && !this.optionTransitioning){
+                                e.stopPropagation();
+                            }
                             
                             await this.openListBox(e)
                         },
-                        focusout: this.closeListBox,
-                        blur: this.closeListBox,
                         keydown: e=>{
                             const key = eventKey(e);
 
                             if(key == 'esc'){
                                 this.closeListBox()
                             }
+                        },
+                        focus:(e)=>{
+                            if(this.listBoxState != 'afterenter'){
+                                e.currentTarget.blur()
+                            }
                         }
                     }
                 },[
                     div({
                         slot: 'append',
-                        staticClass: 'absolute right-2 top-[50%] translate-y-[-50%] text-xl opacity-70 px-2 h-full flex items-center justify-center w-[36px] pointer-events-none z-100'
+                        staticClass: 'absolute right-0 top-[50%] translate-y-[-50%] text-xl opacity-70 px-2 h-full flex items-center justify-center w-[36px] pointer-events-none z-100'
                     },[
                         Icon
                     ])
                 ]),
-                Listbox
+                Option({
+                    attrs:{
+                        'aria-labelledby': inputID
+                    },
+                    domProps:{
+                        id: sharedID,
+                    },
+                    props:{
+                        isTop: this.isTop,
+                        show: this.activatorFocused,
+                        rootClass: this.listClass,
+                        options: this.options,
+                        selected: this.modelValue,
+                    },
+                    on:{
+                        'update:modelValue': e=>{
+                            // this.searchField = e;
+                            this.$emit('update:modelValue', e)
+                        },
+                        // 'update:searchField': e=>{
+                        //     this.searchField = e;
+                        // },
+                        'update:closeOption': this.closeListBox,
+                        'update:transitioning': (e)=>{
+                            this.optionTransitioning = e
+                        },
+                        'update:transitionState':e=>{
+                            this.listBoxState = e
+                        },
+                        // 'update:input': e=>{
+                        //     this.searchField = e
+                        // }
+                    },
+                    scopedSlots:{
+                        default: (options) =>{
+                            return [this.$slots.options?.()]
+                        }
+                    }
+                })
             ])
         }
     }
 </script>
-
-<style>
-    .top-shadow{
-        box-shadow: 0 -25px 50px -12px rgb(0 0 0 / 0.25);
-    }
-</style>
