@@ -18,10 +18,28 @@ export function transitionEvents() {
   }
 
   return {
-    beforeEnter: transitioning,
+    beforeEnter: () => {
+      this.$emit('update:transitionState', 'beforeenter')
+
+      transitioning()
+      this.pseudoFocus = this.options.indexOf(this.selected)
+    },
+    enter: () => {
+      requestAnimationFrame(() => {
+        this.$refs.selected.focus()
+      })
+    },
     enterCancelled: cancelled,
-    afterEnter: transitioned,
-    beforeLeave: transitioned,
+    afterEnter: () => {
+      transitioned()
+      this.$emit('update:transitionState', 'afterenter')
+    },
+    beforeLeave: () => {
+      transitioned()
+
+      this.$emit('update:transitionState', 'beforeleave')
+      this.$emit('update:modelValue', this.pseudoFocus)
+    },
     leaveCancelled: cancelled,
     afterLeave: transitioned,
   }
