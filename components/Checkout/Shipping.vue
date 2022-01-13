@@ -1,8 +1,14 @@
 <template>
-    <section>
+    <section class="w-full">
         <LazyCheckoutDeliveryInfo
             :contents="deliveryInfo"
         />
+
+        <hr
+            class="border-t-[0.75px] border-gray-300 dark:border-gray-700 my-12"
+        />
+
+        <LazyCheckoutShippingMethod/>
     </section>
 </template>
 
