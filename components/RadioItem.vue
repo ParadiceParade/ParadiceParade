@@ -104,7 +104,7 @@
                     }
                 }),
                 div({
-                    class: "text-left"
+                    class: "text-left grid"
                 },[
                     p({
                         class: "truncate font-medium text-gray-900 dark:text-gray-50"
