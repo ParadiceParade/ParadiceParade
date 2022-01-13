@@ -161,7 +161,8 @@ export default {
           is: 'LazyFormAddress'
         },
         {
-          title: 'Shipping'
+          title: 'Shipping',
+          is: 'LazyCheckoutShipping'
         },
         {
           title: 'Payment'
