@@ -35,7 +35,6 @@ import { eventKey, hackTabKey } from '~/utils/main'
             const h3 = (d,c) => h('h3', d, c)
             const p = (d,c) => h('p', d, c)
 
-
             const Button = (d,c) => h('Button', d, c)
             const Img = (d,c) => h('Img', d, c)
             const DeleteIcon = h('MdiDelete')
@@ -48,7 +47,10 @@ import { eventKey, hackTabKey } from '~/utils/main'
 
             const Image = [
                 div({
-                    staticClass: "flex-shrink-0 w-24 h-24 border border-gray-200 dark:border-gray-700 rounded-md overflow-hidden"
+                    staticClass: "flex-shrink-0 w-24 h-24 border border-gray-200 dark:border-gray-700 rounded-md overflow-hidden transition-transform transform-gpu",
+                    class:[{
+                        'scale-[0.95] z-[-1] opacity-0.7': this.confirmRemove
+                    }]
                 },[
                     Img({
                         attrs: {
@@ -131,7 +133,7 @@ import { eventKey, hackTabKey } from '~/utils/main'
 
             const confirmRemove = [
                 div({
-                    staticClass: 'text-center z-10 relative'
+                    staticClass: 'text-center z-[20] relative'
                 },[
                     h3({
                         staticClass: 'font-medium'
@@ -147,7 +149,7 @@ import { eventKey, hackTabKey } from '~/utils/main'
                 ]),
 
                 div({
-                    staticClass: "grid grid-flow-col items-end justify-center text-sm xs:px-2 xs:gap-x-4 gap-x-2 pb-1 z-1",
+                    staticClass: "grid grid-flow-col items-end justify-center text-sm xs:px-2 xs:gap-x-4 gap-x-2 pb-1 z-[20]",
                     tabindex: '0',
                     on:{
                         keydown: e =>{
@@ -186,20 +188,20 @@ import { eventKey, hackTabKey } from '~/utils/main'
                 },[
                     [
                         {
-                            title: 'Cancel',
+                            title: 'Remove',
                             props:{
+                                primary: true,
                                 autofocus: true
-                            },
+                            }
+                        },
+                        {
+                            props:{},
+                            title: 'Cancel',
                             on:{
                                 click:()=> (this.confirmRemove = false),
                             }
                         },
-                        {
-                            title: 'Remove',
-                            props:{
-                                primary: true
-                            }
-                        }
+                        
                     ].map((item, key) => {
                         return Button({
                             key,
@@ -253,7 +255,7 @@ import { eventKey, hackTabKey } from '~/utils/main'
                 domProps:{
                     id: ids.root
                 },
-                staticClass: 'py-6 flex outline-none focus-visible:ring ring-offset-1 ring-offset-white dark:ring-offset-black relative fill-before before:bg-white before:bg-opacity-50 dark:before:bg-black dark:before:bg-opacity-50 before:transition-opacity before:z-1',
+                staticClass: 'py-6 flex outline-none focus-visible:ring ring-offset-1 ring-offset-white dark:ring-offset-black relative fill-before before:bg-white before:bg-opacity-50 dark:before:bg-black dark:before:bg-opacity-50 before:transition-opacity before:z-10 isolate',
                 class:[{
                     'before:opacity-1': this.confirmRemove,
                     'before:opacity-0': !this.confirmRemove
