@@ -19,7 +19,7 @@
       <!-- fab ends -->
 
       <div 
-        class="w-full relative fill-before lg:before:bg-white lg:before:bg-opacity-90 lg:dark:before:bg-[#181818] before:left-auto before:right-0 before:w-screen before:z-[-1] isolate"
+        class="w-full relative fill-before lg:before:bg-white lg:before:bg-opacity-90 lg:dark:before:bg-[#181818] before:left-auto before:right-0 before:w-screen before:z-[-1] isolate pb-16"
       >
         <header
           class="h-[48px] xs:h-[56px] lg:h-[64px] xl:h-[72px] w-full border-b-[0.75px] border-gray-200 dark:border-gray-800 dark:bg-[#191919] bg-white sticky top-0 z-10 grid grid-flow-col grid-cols-[auto,1fr] items-center mb-8 overflow-x-hidden"
