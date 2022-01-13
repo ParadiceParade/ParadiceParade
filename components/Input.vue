@@ -33,6 +33,10 @@ export default {
       type: String,
       default: 'text'
     },
+    id: {
+      type: String,
+      default: undefined
+    },
     pattern: {
       type: String,
       default: undefined
@@ -58,7 +62,8 @@ export default {
       default: undefined
     },
     disabled: Boolean,
-    hideCaret: Boolean
+    hideCaret: Boolean,
+    autofocus: Boolean
   },
 
   emits: ['update:modelValue'],
@@ -78,6 +83,10 @@ export default {
   mounted() {
     this.$nextTick(() => {
       const input = this.$refs.input
+
+      if(this.autofocus){
+        input.focus()
+      }
 
       const getValidation = this.getValidation()
 
@@ -147,7 +156,7 @@ export default {
     const label = (d, c) => h('label', d, c)
     const btn = (d, c) => h('Button', d, c)
 
-    const id = `uit-${this._uid}`
+    const id = this.id || `uit-${this._uid}`
 
     const getValidation = this.getValidation()
 
@@ -349,8 +358,8 @@ export default {
 
 <style>
 .root[data-input] {
-  --ui-rounded: 8px;
-  --ui-height: 56px;
+  --ui-rounded: 4px;
+  --ui-height: 48px;
   --ui-lable-font-size: 1.05rem;
   --ui-min-height: initial;
   --ui-background: initial;
