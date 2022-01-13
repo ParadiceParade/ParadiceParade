@@ -115,7 +115,13 @@
         <div
             class="px-4 sm:px-8 pt-12 pb-6"
         >
-            <Button type="submit" size="lg" primary block>
+            <Button 
+              type="submit" 
+              size="lg" 
+              primary 
+              block
+              @click="submitForm"
+            >
                 Continue to shipping
             </Button>
         </div>
@@ -353,5 +359,16 @@ export default Vue.extend({
         ]
     }
   },
+
+  methods:{
+    submitForm(){
+      this.$router.replace({
+        query:{
+          ...this.$route.query,
+          step: 3
+        }
+      })
+    }
+  }
 });
 </script>
