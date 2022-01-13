@@ -25,7 +25,7 @@
           <div class="flow-root">
             <ul
               role="list"
-              class="-my-6 divide-y divide-gray-200 dark:divide-gray-700"
+              class="-my-6 divide-dotted divide-y divide-gray-300 dark:divide-gray-700"
             >
               <CartItem 
                 v-for="product in products"
@@ -42,7 +42,7 @@
       </div>
 
       <div
-        class="border-t border-gray-200 dark:border-gray-700 py-6 px-4"
+        class="border-t border-dashed border-gray-300 dark:border-gray-700 py-6 px-4"
         :class="{
           'sm:px-8': getIsCheckout,
           'sm:px-6': !getIsCheckout
