@@ -1,5 +1,5 @@
 <template>
-    <section v-if="contents" class="w-full max-w-[calc(100vw-2rem)] md:max-w-lg">
+    <section v-if="contents" class="w-full max-w-[calc(100vw-2rem)] md:max-w-2xl">
         <h2 class="text-xl mb-4">   
             Delivery info
         </h2>
@@ -14,12 +14,12 @@
                 class="flex w-full justify-between items-center p-4"
             >
                 <span
-                    class="text-sm opacity-70 mr-2"
+                    class="text-sm opacity-70 mr-2 whitespace-nowrap"
                 >
                     {{info.title}}:
                 </span>
 
-                <span class="w-full truncate text-right">
+                <span class="w-full truncate text-right text-true-gray-800 dark:text-true-gray-200">
                     {{info.content}}
                 </span>
             </div>
