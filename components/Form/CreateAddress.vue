@@ -120,9 +120,13 @@
               size="lg" 
               primary 
               block
+              class="group"
               @click="submitForm"
             >
                 Continue to shipping
+                <span aria-hidden="true" 
+                class="group-hover:translate-x-1 transform-gpu transition-transform"
+              > &rarr;</span>
             </Button>
         </div>
 
