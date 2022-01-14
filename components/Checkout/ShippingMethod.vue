@@ -7,7 +7,7 @@
         <div
             :aria-labelledby="titleId"
             role="radiogroup"
-            class="grid outline-none grid-cols-1 max-w-xl gap-y-4"
+            class="grid outline-none grid-cols-1 max-w-2xl gap-y-4"
         >
             <RadioItem
                 v-for="(method, i) in methods"
