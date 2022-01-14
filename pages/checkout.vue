@@ -165,7 +165,8 @@ export default {
           is: 'LazyCheckoutShipping'
         },
         {
-          title: 'Payment'
+          title: 'Payment',
+          is: 'LazyCheckoutPayment'
         }
       ]
     },
