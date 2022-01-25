@@ -1,7 +1,7 @@
 <template>
   <section>
 
-    <Form name='sign-in' action="." submit-text='Sign up' class="py-6 px-4 bg-white dark:bg-[#222222] rounded-lg border-[0.75px] border-gray-200 dark:border-gray-700 dark:border-opacity-60 shadow-lg">
+    <Form name='sign-in' action="." submit-text='Sign up' class="py-6 px-4 bg-white dark:bg-[#202020] rounded-lg border-[0.75px] border-gray-200 dark:border-gray-700 dark:border-opacity-60 shadow-lg">
         <h2 class="font-medium text-xl mb-4 px-2">
             {{title}}
         </h2>
@@ -14,12 +14,12 @@
         <Input
             v-for="(input, i) in inputs"
             :key="i"
-            :class="input.class || 'mb-4'"
+            :class="input.class || 'mb-6'"
             v-bind="input.attrs"
             v-on="input.events"
         />
 
-        <div aria-label="password checklist" class="ml-2 mb-4">
+        <div aria-label="password checklist" class="ml-2 mb-6">
             <div
                 v-for="(field, i) in passwordCheckList"
                 :key="i"
@@ -39,24 +39,25 @@
         <Input
             v-for="(input, i) in confirmPasswordInput"
             :key="`${i}-confirm-password`"
-            :class="input.class || 'mb-4'"
+            :class="input.class || 'mb-6'"
             v-bind="input.attrs"
             v-on="input.events"
         />
     </Form>
 
-    <h3 class="font-normal text-sm sm:text-base mt-3 pr-2 pl-5 pb-2 border-b border-gray-200 dark:border-gray-700 w-full">
+    <h3 class="font-normal text-sm sm:text-base mt-8 pr-2 pb-2 border-b border-gray-200 dark:border-gray-700 w-full">
         Have an account? 
         <Button 
             link 
             underline 
+            :to="signInLink"
             class="text-primary-700 dark:text-primary-400 mx-0 text-base"
             @click="$emit('change-form', 'SignIn')">
             Sign in
         </Button>
     </h3>
 
-    <h4 class="font-normal mt-2 pr-2 pl-5 text-sm text-gray-700 dark:text-gray-300">
+    <h4 class="font-normal mt-2 pr-2 text-sm text-gray-700 dark:text-gray-300">
         By creating an account, you agree to our
         <Button link underline class="mx-0 text-primary-700 dark:text-primary-400 text-[0.9rem]">
             Terms of Service
@@ -91,6 +92,10 @@
             title: {
                 type: String,
                 default: 'Create your account'
+            },
+            signInLink:{
+                type:String,
+                default: undefined
             }
         },
 
@@ -149,7 +154,7 @@
 
             confirmPasswordInput(){
                 return [{
-                    class:'mb-6',
+                    class:'mb-8',
                     attrs: {
                         label: `Confirm password${!this.confirmPassword ? '*':''}`,
                         type:'password',
