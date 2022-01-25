@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="!onboardPage"
     class="h-[32px] text-white bg-black flex justify-between items-center px-4"
   >
     <Button
@@ -13,24 +14,25 @@
     </Button>
 
     <div class="grid gap-x-1 items-center grid-flow-col h-full">
-      <Button to="/" link text="Create account" />
+      <Button to="/sign-up" link text="Create account" />
 
       <span class="h-[80%] w-[1px] border-l-[0.75px] border-opacity-30" />
 
-      <Button to="/" link text="Sign in" />
+      <Button to="/sign-in" link text="Sign in" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { nextAnimFrame } from '~/utils/main'
+import { nextAnimFrame,onboardPage } from '~/utils/main'
 
 export default {
   name: 'Banner',
 
   computed: {
-    ...mapState(['currency'])
+    ...mapState(['currency']),
+    onboardPage
   },
 
   methods: {
