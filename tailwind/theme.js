@@ -29,10 +29,10 @@ module.exports = {
       144: '36rem',
     },
     borderRadius: {
-      xs: '.5px',
-      sm: '1px',
-      md: '2px',
-      lg: '4px',
+      xs: '1px',
+      sm: '2px',
+      md: '4px',
+      lg: '8px',
     },
   },
 }
