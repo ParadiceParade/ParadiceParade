@@ -171,7 +171,7 @@ ring-offset-1 ring-primary-900 dark:ring-primary-700 font-semibold;
 }
 
 .md[data-btn] {
-  @apply px-6 h-[44px] text-base rounded-md;
+  @apply px-4 h-[42px] text-base rounded-md;
 }
 
 .lg[data-btn] {
