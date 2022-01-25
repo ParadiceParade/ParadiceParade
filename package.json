@@ -36,6 +36,7 @@
     "nuxt": "^2.15.7",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
+    "portal-vue": "^2.1.7",
     "redirect-ssl": "^3.0.0",
     "sequelize": "^6.12.0-alpha.1",
     "session": "^0.1.0",
