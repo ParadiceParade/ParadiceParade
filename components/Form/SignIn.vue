@@ -1,7 +1,7 @@
 <template>
   <section>
 
-    <Form name='sign-in' action="." submit-text='Sign in' class="py-6 px-4 bg-white dark:bg-[#222222] rounded-lg border-[0.75px] border-gray-200 dark:border-gray-700 dark:border-opacity-60 shadow-lg">
+    <Form name='sign-in' action="." submit-text='Sign in' class="py-6 px-4 bg-white dark:bg-[#202020] rounded-lg border-[0.75px] border-gray-200 dark:border-gray-700 dark:border-opacity-60 shadow-lg">
         <h2 class="font-medium text-xl mb-4 px-2">
             {{title}}
         </h2>
@@ -19,15 +19,19 @@
             v-on="input.events"
         />
 
-        <Button link underline class="text-primary-700 dark:text-primary-400 mb-6 ml-1" @click="$emit('change-form', 'ResetPassword')">
+        <Button link underline class="text-primary-700 dark:text-primary-400 mb-6 ml-1"
+            :to="forgotPasswordLink"
+         @click="$emit('change-form', 'ResetPassword')" 
+        >
             Forgot password?
         </Button>
     </Form>
 
-    <h3 class="font-normal text-sm sm:text-base mt-3 pr-2 pl-5">
+    <h3 class="font-normal text-sm sm:text-base mt-6 pr-2">
         Need an account? 
         <Button 
             link 
+            :to="signUpLink"
             underline 
             class="text-primary-700 dark:text-primary-400 mx-0 text-base" 
             @click="$emit('change-form', 'SignUp')">
@@ -47,6 +51,14 @@
             title: {
                 type: String,
                 default: 'Sign in'
+            },
+            forgotPasswordLink:{
+                type:String,
+                default: undefined
+            },
+            signUpLink:{
+                type:String,
+                default: undefined
             }
         },
 
@@ -65,7 +77,7 @@
                             label: `Email or username${!this.username ? '*':''}`,
                             modelValue: this.username,
                         },
-                        class:['mb-4'],
+                        class:['mb-6'],
                         events: {
                             'update:modelValue': (e) => {
                                 this.username = e;
