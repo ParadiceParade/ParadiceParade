@@ -554,3 +554,8 @@ export const serviceCall = async (axiosCall) => {
     }
   }
 }
+
+
+export function onboardPage() {
+  return /^\/sign-in|^\/sign-up|^\/forgot-password/.test(this.$route.path)
+}
