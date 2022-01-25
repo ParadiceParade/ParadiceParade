@@ -33,7 +33,7 @@
 
                     <div class="font-normal text-gray-700 dark:text-gray-300 text-base mt-3 pr-2 pl-5">
                         <Button link underline primary class="mx-0" @click="$emit('change-form','SignIn')">
-                            Log in
+                            Sign in
                         </Button>
                         or
                         <Button link underline primary class="mx-0" @click="$emit('change-form','SignUp')">
@@ -71,10 +71,13 @@
 
                     </Form>
 
-                    <h4 class="font-normal text-base mt-3 pr-2 pl-5">
+                    <h4 class="font-normal text-base mt-6 pr-2 pl-5">
                         Or 
-                        <Button link underline primary class="mx-0" @click="$emit('change-form','SignIn')">
-                            Log in
+                        <Button link underline primary class="mx-0" 
+                            :to="signInLink"
+                        @click="$emit('change-form','SignIn')"
+                        >
+                            Sign in
                         </Button>
                     </h4>
                 </template>
@@ -88,8 +91,12 @@
     import Vue from 'vue'
 
     export default Vue.extend({
-        name:'FormForgotPassword',
+        name:'FormResetPassword',
         props:{
+            signInLink:{
+                type:String,
+                default:undefined
+            }
         },
 
         data:()=>({
@@ -97,7 +104,7 @@
             password: '',
             error: null,
             showSent: false,
-            rootClass: "py-6 px-4 bg-white dark:bg-[#222222] rounded-lg border-[0.75px] border-gray-200 dark:border-gray-700 dark:border-opacity-60 shadow-lg",
+            rootClass: "py-6 px-4 bg-white dark:bg-[#202020] rounded-lg border-[0.75px] border-gray-200 dark:border-gray-700 dark:border-opacity-60 shadow-lg",
             rootKey: 0
         }),
 
