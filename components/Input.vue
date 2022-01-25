@@ -192,11 +192,11 @@ export default {
               ...scoping
             },
             class: [
-              'main fill-before-after ring-1 ring-black ring-opacity-10 dark:ring-white dark:ring-opacity-10',
+              'main fill-before-after ring-[0.75px] ring-black ring-opacity-20 dark:ring-white dark:ring-opacity-20',
 
               {
                 'before:border-dotted before:border-[1.5px]': this.disabled,
-                'before:border-2': !this.disabled,
+                'before:border-1': !this.disabled,
                 'before:border-amber-500 dark:before:border-amber-300': invalid && !this.focused,
                 'focused before:border-blue-700 dark:before:border-blue-400': this.focused,
                 'has-value': vmodel,
