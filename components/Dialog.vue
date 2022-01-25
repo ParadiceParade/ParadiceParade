@@ -1,5 +1,10 @@
-<template>
-  <div
+  <template>
+  <MountingPortal
+    v-if="renderIf"
+    mount-to="body"
+    append
+  >
+    <div
     v-if="renderIf"
     class="absolute top-0 left-0 w-full h-full isolate grid justify-center items-center z-10"
     :class="{ 'pointer-events-auto': dialogActive }"
@@ -32,6 +37,7 @@
       </div>
     </Transition>
   </div>
+  </MountingPortal>
 </template>
 
 <script>
